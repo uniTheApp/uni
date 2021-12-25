@@ -10,8 +10,6 @@ const AuthProvider = ({ children }) => {
         <View>
             <AuthContext.Provider value={null}>
             {children}
-
-
             </AuthContext.Provider>
         </View>
     )
