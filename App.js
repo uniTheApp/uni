@@ -1,14 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import tw from 'tailwind-rn';
+import React from "react";
+import StackNavigator from "./StackNavigator";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   return (
-    <View style={tw("flex-1 justify-center items-center")}>
-      <Text>Test!</Text>
-      <Button title="click me!"></Button>
-    </View>
-
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
+    
   );
 }
 
