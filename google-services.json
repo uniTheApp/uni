@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "230372004385",
+    "project_id": "unitheapp-deedd",
+    "storage_bucket": "unitheapp-deedd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230372004385:android:5d24d313f8673f31180960",
+        "android_client_info": {
+          "package_name": "host.exp.exponent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230372004385-h5c36lha0m0331fa1nnlt3tp60siaegt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgsVlWpVEUtXUfGyrBmfQNmBQU2xFK_Cs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230372004385-h5c36lha0m0331fa1nnlt3tp60siaegt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "230372004385-60a7rikhsh9pa9v5spm7oil0evah2vo3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "host.exp.exponent"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
