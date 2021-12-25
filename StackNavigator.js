@@ -3,6 +3,7 @@ import React from 'react'
 import HomeScreen from './screens/HomeScreen';
 import ChatScreen from './screens/ChatScreen';
 import LoginScreen from './screens/LoginScreen';
+import useAuth from './hooks/useAuth';
 
 
 
@@ -12,7 +13,8 @@ const Stack = createNativeStackNavigator();
 
 
 const StackNavigator = () => {
-    const user = false;
+    // deconst useAuth hook to get user obj
+    const { user } = useAuth();
 
     return (
         <Stack.Navigator>
