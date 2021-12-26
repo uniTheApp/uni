@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import * as Google from "expo-google-app-auth"
 import { GoogleAuthProvider, onAuthStateChanged, signInWithCredential, signOut } from "@firebase/auth"
 import { auth } from "../firebase"
@@ -13,7 +13,20 @@ const config = {
 }
 
 export const AuthProvider = ({ children }) => {
+    const [error, setError] = useState(null);
+    const [user, setUser] = useState(null)
 
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // logged in 
+                setUser(user)
+            } else {
+                // not logged in 
+                setUser(null)
+            }
+        })
+    }, [])
     // may have issue with android in future
     // expo build:android did not let change name to expo hosting
     // around ~1:09:00 in tut vid
@@ -29,13 +42,14 @@ export const AuthProvider = ({ children }) => {
 
                 return Promise.reject();
             })
+            .catch(error => setError(error))
     }
 
 
     return (
         <AuthContext.Provider 
             value={{
-                user: null,
+                user,
                 signInWithGoogle
             }}
             
