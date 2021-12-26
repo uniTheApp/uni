@@ -15,9 +15,9 @@ const config = {
 export const AuthProvider = ({ children }) => {
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null)
+    const [loadingInitial, setLoadingInitial] = useState(true)
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+    useEffect(() => onAuthStateChanged(auth, (user) => {
             if (user) {
                 // logged in 
                 setUser(user)
@@ -25,8 +25,9 @@ export const AuthProvider = ({ children }) => {
                 // not logged in 
                 setUser(null)
             }
-        })
-    }, [])
+
+            setLoadingInitial(false)
+        }), [])
     // may have issue with android in future
     // expo build:android did not let change name to expo hosting
     // around ~1:09:00 in tut vid
@@ -54,7 +55,7 @@ export const AuthProvider = ({ children }) => {
             }}
             
         >        
-        {children}
+            {!loadingInitial && children}
         </AuthContext.Provider>
     );
 };
