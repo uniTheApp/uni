@@ -3,6 +3,13 @@ import * as Google from "expo-google-app-auth"
 
 const AuthContext = createContext({})
 
+const config = {
+    androidClientId: "230372004385-h5c36lha0m0331fa1nnlt3tp60siaegt.apps.googleusercontent.com",
+    iosClientId: "230372004385-60a7rikhsh9pa9v5spm7oil0evah2vo3.apps.googleusercontent.com",
+    scopes: ["profile", "email"],
+    permissions: ["public profile", "email", "gender", "location"]
+}
+
 export const AuthProvider = ({ children }) => {
 
     // may have issue with android in future
@@ -11,19 +18,24 @@ export const AuthProvider = ({ children }) => {
     // so may not be able to use expo on android, but will 
     // be able to in future when we change apk package name
     const signInWithGoogle = async () => {
+            await Google.logInAsync(config).then( async (logInResult) => {
+                if (logInResult.type === 'success') {
 
+                }
+            })
     }
 
 
     return (
-    <AuthContext.Provider 
-        value={{
-            user: null,
-        }}
-        
-    >        
-    {children}
-    </AuthContext.Provider>
+        <AuthContext.Provider 
+            value={{
+                user: null,
+                signInWithGoogle
+            }}
+            
+        >        
+        {children}
+        </AuthContext.Provider>
     );
 };
 
