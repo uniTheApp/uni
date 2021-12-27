@@ -50,6 +50,11 @@ const LoginScreen = () => {
 
             </View>
 
+            <View style={styles.buttonContainer}>
+
+
+            </View>
+
 
             {/* end body */}
 
