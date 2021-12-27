@@ -4,11 +4,11 @@ import useAuth from '../hooks/useAuth';
     // ES6 deconstrution operator
 const LoginScreen = () => {
 
-    const { signInWithGoogle } = useAuth();
+    const { signInWithGoogle, loading } = useAuth();
 
     return (
         <View>
-            <Text>Please Login</Text>
+            <Text>{ loading ? 'loading...' : "Please Login"}</Text>
             <Button title="login" onPress={signInWithGoogle}/>
         </View>
     )
