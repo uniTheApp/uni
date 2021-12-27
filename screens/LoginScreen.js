@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useLayoutEffect } from 'react';
-import { View, Text, Button, SafeAreaView} from 'react-native';
+import { View, Text, Button, SafeAreaView, Touchable} from 'react-native';
+import { TouchableOpacity } from 'react-native-web';
 import useAuth from '../hooks/useAuth';
     // ES6 deconstrution operator
 const LoginScreen = () => {
@@ -12,7 +13,12 @@ const LoginScreen = () => {
     return (
         <SafeAreaView>
             {/* header */}
-
+            {/* <TouchableOpacity>
+                <Text>Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Text>Sign in</Text>
+            </TouchableOpacity> */}
 
 
             {/* end header */}
