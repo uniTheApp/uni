@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, SafeAreaView } from 'react-native'
 import useAuth from '../hooks/useAuth'
 
 const HomeScreen = () => {
@@ -9,12 +9,12 @@ const HomeScreen = () => {
     const { logout } = useAuth();
 
     return (
-        <View>
+        <SafeAreaView>
             <Text>I am the home screen</Text>
             <Button title="Go to the Chat Screen" onPress={() => navigation.navigate("Chat")}></Button>
 
             <Button title="Logout" onPress={logout} ></Button>
-        </View>
+        </SafeAreaView>
     )
 }
 
