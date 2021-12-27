@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null)
     const [loadingInitial, setLoadingInitial] = useState(true)
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -28,12 +29,23 @@ export const AuthProvider = ({ children }) => {
 
             setLoadingInitial(false)
         }), [])
+
+    const logout = () => {
+        setLoading(true)
+
+        signOut(auth)
+        .catch((error) => setError(error))
+        .finally(() => setLoading(false))
+    }
+
     // may have issue with android in future
     // expo build:android did not let change name to expo hosting
     // around ~1:09:00 in tut vid
     // so may not be able to use expo on android, but will 
     // be able to in future when we change apk package name
     const signInWithGoogle = async () => {
+            setLoading(true);
+
             await Google.logInAsync(config).then( async (logInResult) => {
                 if (logInResult.type === 'success') {
                     const { idToken, accessToken } = logInResult;
@@ -44,6 +56,7 @@ export const AuthProvider = ({ children }) => {
                 return Promise.reject();
             })
             .catch(error => setError(error))
+            .finally(() => setLoading(false))
     }
 
 
@@ -51,10 +64,14 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider 
             value={{
                 user,
-                signInWithGoogle
+                loading,
+                error,
+                signInWithGoogle,
+                logout
             }}
             
         >        
+            {/* show the home screen if already logged in */}
             {!loadingInitial && children}
         </AuthContext.Provider>
     );
