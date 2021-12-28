@@ -6,7 +6,6 @@ import LoginScreen from './screens/LoginScreen';
 import useAuth from './hooks/useAuth';
 
 
-
 const Stack = createNativeStackNavigator();
 
 
