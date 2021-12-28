@@ -4,11 +4,14 @@ import React from 'react'
 import { View, Text, Button, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
 import useAuth from '../hooks/useAuth'
 import tw from "tailwind-rn";
+import { Ionicons } from "@expo/vector-icons"
+import { useFonts, Chivo_300Light } from '@expo-google-fonts/chivo'
 
 const styles = StyleSheet.create({
     headerText: {
         textAlign: "center",
         fontSize: 24,
+        fontFamily: "Chivo_300Light"
     },
     headerLine: {
         borderBottomColor: "#9C9C9C",
@@ -24,15 +27,23 @@ const HomeScreen = () => {
     const navigation = useNavigation();
     const { user, logout } = useAuth();
 
+    let [fontsloaded] = useFonts({
+        Chivo_300Light,
+    })
+
 
     return (
         <SafeAreaView>
             {/* header */}
-            <View >
+            <View style={tw("items-center relative")} >
                 <Text style={styles.headerText}>UnI</Text>
-                <View style={styles.headerLine}></View>
-                <TouchableOpacity></TouchableOpacity>
+                <TouchableOpacity style={tw("absolute right-0")}>
+                    <Ionicons name="filter" size={24} color="black" />
+                </TouchableOpacity>
+                
             </View>
+            <View style={styles.headerLine}></View>
+
 
 
             {/* end of header */}
