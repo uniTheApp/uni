@@ -1,36 +1,33 @@
 import { useNavigation } from '@react-navigation/native'
-import { TwitterAuthProvider } from 'firebase/auth'
+
 import React from 'react'
 import { View, Text, Button, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
 import useAuth from '../hooks/useAuth'
 import tw from "tailwind-rn";
 import { Ionicons } from "@expo/vector-icons"
-import { useFonts, Chivo_300Light } from '@expo-google-fonts/chivo'
+import { useFonts }from 'expo-font'
+import AppLoading from 'expo-app-loading';
 
-const styles = StyleSheet.create({
-    headerText: {
-        textAlign: "center",
-        fontSize: 24,
-        fontFamily: "Chivo_300Light"
-    },
-    headerLine: {
-        borderBottomColor: "#9C9C9C",
-        borderBottomWidth: 1, 
-        marginTop: 10,
-        marginLeft: 9,
-        marginRight: 9,
-    }
-})
+
+
+
+
+
+
 
 const HomeScreen = () => {
 
     const navigation = useNavigation();
     const { user, logout } = useAuth();
 
-    let [fontsloaded] = useFonts({
-        Chivo_300Light,
-    })
+     let [fontsLoaded] = useFonts({
+        'Chivo-Regular': require('../assets/fonts/Chivo-Regular.ttf')
+      });
 
+    if (!fontsLoaded) {
+        // NEED TO CREATE A SPLASH SCREEN
+        return <AppLoading></AppLoading>
+    }
 
     return (
         <SafeAreaView>
@@ -58,6 +55,23 @@ const HomeScreen = () => {
 
 
 }
+
+
+const styles = StyleSheet.create({
+    headerText: {
+        textAlign: "center",
+        fontSize: 24,
+        fontFamily: "Chivo-Regular"
+    },
+    headerLine: {
+        borderBottomColor: "#9C9C9C",
+        borderBottomWidth: 1, 
+        marginTop: 10,
+        marginLeft: 9,
+        marginRight: 9,
+    }
+})
+
 
 export default HomeScreen
 
