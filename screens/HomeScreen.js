@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
 
 import React from 'react'
-import { View, Text, Button, SafeAreaView, StyleSheet, FlatList, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, Button, SafeAreaView, StyleSheet, Image, FlatList, Dimensions, TouchableOpacity } from 'react-native'
 import useAuth from '../hooks/useAuth'
 import tw from "tailwind-rn";
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, Entypo } from "@expo/vector-icons"
 import { useFonts }from 'expo-font'
 import AppLoading from 'expo-app-loading';
 import Swiper from "react-native-deck-swiper"
@@ -27,18 +27,27 @@ const HomeScreen = () => {
             firstName: "Kyle",
             lastName: "Andruczk",
             age: 20,
+            college: "Yale",
+            major: "Psychology",
+            gradYear: 24,
             photoURL: "https://avatars.githubusercontent.com/u/84470596?v=4",
         },
         {   
             firstName: "Carolyn",
             lastName: "Qu",
             age: 19,
+            college: "Yale",
+            major: "Computer Science",
+            gradYear: 24,
             photoURL: "https://avatars.githubusercontent.com/u/67798872?v=4",
         },
         {   
             firstName: "Suba",
             lastName: "Ramesh",
             age: 19,
+            college: "Yale",
+            major: "Computer Science",
+            gradYear: 24,
             photoURL: "https://avatars.githubusercontent.com/u/18357230?v=4",
         },
     ]
@@ -88,7 +97,18 @@ const HomeScreen = () => {
                     <Swiper cards={DUMMY_DATA}
                         renderCard={(card) => 
                             <View key={card.id} style={styles.imgCard}>
-                                <Text style={styles.imgCardText}>{card.firstName}</Text>
+                                <View>
+                                    <View>
+                                        <Text style={styles.imgCardText}>{card.firstName} - {card.college} '{card.gradYear}</Text>
+                                        <Text style={styles.imgCardText}>{card.age} years old | {card.major}</Text>
+                                    </View>
+                                    <TouchableOpacity style={tw("absolute right-4")}>
+                                        <Entypo name="dots-three-vertical" size={20} color="black" />
+                                    </TouchableOpacity>
+
+
+                                </View>
+                                <Image style={{flex:1 , width: undefined, height: undefined}}  source={{uri: card.photoURL}}></Image>
                             </View>
 
                         }
@@ -131,7 +151,7 @@ const styles = StyleSheet.create({
     },
     imgCard: {
         marginTop: -59,
-        height: "75%",
+        height: "90%",
         backgroundColor: "blue",
         width: '112%'
 
