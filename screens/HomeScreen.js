@@ -102,7 +102,7 @@ const HomeScreen = () => {
                                         <Text style={styles.imgCardText}>{card.firstName} - {card.college} '{card.gradYear}</Text>
                                         <Text style={styles.imgCardText}>{card.age} years old | {card.major}</Text>
                                     </View>
-                                    <TouchableOpacity style={tw("absolute right-4")}>
+                                    <TouchableOpacity style={tw("absolute right-4 top-4 green")}>
                                         <Entypo name="dots-three-vertical" size={20} color="black" />
                                     </TouchableOpacity>
 
@@ -152,6 +152,8 @@ const styles = StyleSheet.create({
     imgCard: {
         marginTop: -59,
         height: "90%",
+        marginLeft: -20,
+
         backgroundColor: "blue",
         width: '112%'
 
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
     },
     imgCardSwipe: {
         // marginTop: -20,
-        marginLeft: -20,
+        // marginLeft: -20,
         // backgroundColor: "transparent"
         // marginRight: -20
 
