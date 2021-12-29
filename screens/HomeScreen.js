@@ -4,11 +4,11 @@ import React from 'react'
 import { View, Text, Button, SafeAreaView, StyleSheet, Image, FlatList, Dimensions, TouchableOpacity } from 'react-native'
 import useAuth from '../hooks/useAuth'
 import tw from "tailwind-rn";
-import { Ionicons, Entypo, AntDesign } from "@expo/vector-icons"
+import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
 import { useFonts }from 'expo-font'
 import AppLoading from 'expo-app-loading';
 import Swiper from "react-native-deck-swiper"
-import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import { backgroundColor, color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 
 
@@ -69,7 +69,7 @@ const HomeScreen = () => {
         return <AppLoading></AppLoading>
     } else {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={tw("bg-white")}>
                 {/* header */}
                 <View style={tw("items-center relative")} >
                     <Text style={styles.headerText}>UnI</Text>
@@ -98,8 +98,13 @@ const HomeScreen = () => {
                     <Swiper 
                         cards={DUMMY_DATA}
                         cardIndex={0}
+                        stackSize={5}
                         animateCardOpacity
-                        disableBottomzsSwipe={true}
+                        disableBottomSwipe={true}
+                        horizontalSwipe={false}
+                        outputRotationRange={["0deg", "0deg", "0deg"]}
+                        showSecondCard={true}
+                        verticalThreshold={100}
                         renderCard={(card) => 
                             <View key={card.id} style={styles.imgCard}>
                                 <View>
@@ -115,14 +120,17 @@ const HomeScreen = () => {
 
 
                                 </View>
-                                <View style={tw("absolute h-150 w-150 bottom-0 right-4 bg-white rounded-full")}>
-                                    <TouchableOpacity >
-                                            <AntDesign name="hearto" size={24} color="black" />
-                                    </TouchableOpacity>
-
-                                </View>
-
+                                {/* profile pics */}
                                 <Image style={{flex:1 , width: undefined, height: undefined}}  source={{uri: card.photoURL}}></Image>
+
+                                {/* buttons */}
+                                <TouchableOpacity style={tw("absolute bottom-20 right-4 bg-white rounded-full")}>
+                                        <Feather name="send" size={24} color="#B8EFFF" style={styles.cardButton} />
+                                </TouchableOpacity>
+                                <TouchableOpacity style={tw("absolute bottom-5 right-4 bg-white rounded-full")}>
+                                        <AntDesign name="hearto" size={24} color="#B8EFFF" style={styles.cardButton} />
+                                </TouchableOpacity>
+                                
                             </View>
 
                         }
@@ -169,7 +177,8 @@ const styles = StyleSheet.create({
         marginLeft: -20,
 
         // backgroundColor: "blue",
-        width: '112%'
+        width: '112%',
+        backgroundColor: "white"
 
     },
     imgCardText : {
@@ -193,12 +202,13 @@ const styles = StyleSheet.create({
         marginLeft: 9
 
     },
-    imgCardSwipe: {
+    cardButton: {
         // marginTop: -20,
         // marginLeft: -20,
         // backgroundColor: "transparent"
         // marginRight: -20
 
+        margin: 10,
 
 
 
