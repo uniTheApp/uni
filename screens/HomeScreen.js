@@ -1,13 +1,14 @@
 import { useNavigation } from '@react-navigation/native'
 
 import React from 'react'
-import { View, Text, Button, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Button, SafeAreaView, StyleSheet, FlatList, Dimensions, TouchableOpacity } from 'react-native'
 import useAuth from '../hooks/useAuth'
 import tw from "tailwind-rn";
 import { Ionicons } from "@expo/vector-icons"
 import { useFonts }from 'expo-font'
 import AppLoading from 'expo-app-loading';
 import Swiper from "react-native-deck-swiper"
+import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 
 
@@ -72,7 +73,7 @@ const HomeScreen = () => {
 
 
                 {/* body / swipe section */}
-                <View style={tw("items-center relative")} >
+                {/* <View>
                     
                     <Text style={styles.headerText}>USER - COLLEGE YEAR</Text>
                     <TouchableOpacity style={tw("absolute right-4")}>
@@ -80,17 +81,18 @@ const HomeScreen = () => {
                     </TouchableOpacity>
                     
                 </View>
-                <View style={styles.headerLine}></View>
+                <View style={styles.headerLine}></View> */}
 
                 {/* cards */}
-                <View style={tw("relative")}>
+                <View style={styles.imgCardSwipe}>
                     <Swiper cards={DUMMY_DATA}
                         renderCard={(card) => 
-                            <View key={card.id} style={tw("bg-red-500 h-3/4 left-0")}>
-                                <Text>{card.firstName}</Text>
+                            <View key={card.id} style={styles.imgCard}>
+                                <Text style={styles.imgCardText}>{card.firstName}</Text>
                             </View>
 
                         }
+            
                     />
                 </View>
 
@@ -102,10 +104,7 @@ const HomeScreen = () => {
                 {/* end of body */}
     
     
-                <Text >I am the home screen</Text>
-                <Button title="Go to the Chat Screen" onPress={() => navigation.navigate("Chat")}></Button>
-    
-                <Button title="Logout" onPress={logout} ></Button>
+
             </SafeAreaView>
         )
     }
@@ -129,7 +128,33 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 9,
         marginRight: 9,
-    }
+    },
+    imgCard: {
+        marginTop: -59,
+        height: "75%",
+        backgroundColor: "blue",
+        width: '112%'
+
+    },
+    imgCardText : {
+        // alignSelf: "stretch",
+        backgroundColor: "red",
+        // flex: 1,
+        fontFamily: "Chivo-Regular",
+        fontSize: 24
+
+    },
+    imgCardSwipe: {
+        // marginTop: -20,
+        marginLeft: -20,
+        // backgroundColor: "transparent"
+        // marginRight: -20
+
+
+
+
+
+    },
 })
 
 
