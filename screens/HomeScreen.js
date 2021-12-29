@@ -4,11 +4,12 @@ import React from 'react'
 import { View, Text, Button, SafeAreaView, StyleSheet, Image, FlatList, Dimensions, TouchableOpacity } from 'react-native'
 import useAuth from '../hooks/useAuth'
 import tw from "tailwind-rn";
-import { Ionicons, Entypo } from "@expo/vector-icons"
+import { Ionicons, Entypo, AntDesign } from "@expo/vector-icons"
 import { useFonts }from 'expo-font'
 import AppLoading from 'expo-app-loading';
 import Swiper from "react-native-deck-swiper"
 import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+
 
 
 
@@ -94,20 +95,33 @@ const HomeScreen = () => {
 
                 {/* cards */}
                 <View style={styles.imgCardSwipe}>
-                    <Swiper cards={DUMMY_DATA}
+                    <Swiper 
+                        cards={DUMMY_DATA}
+                        cardIndex={0}
+                        animateCardOpacity
+                        disableBottomzsSwipe={true}
                         renderCard={(card) => 
                             <View key={card.id} style={styles.imgCard}>
                                 <View>
                                     <View>
                                         <Text style={styles.imgCardText}>{card.firstName} - {card.college} '{card.gradYear}</Text>
-                                        <Text style={styles.imgCardText}>{card.age} years old | {card.major}</Text>
+                                        <Text style={styles.imgCardTextAlt}>{card.age} years old | {card.major}</Text>
                                     </View>
                                     <TouchableOpacity style={tw("absolute right-4 top-4 green")}>
                                         <Entypo name="dots-three-vertical" size={20} color="black" />
                                     </TouchableOpacity>
+                                    
+                                    
 
 
                                 </View>
+                                <View style={tw("absolute h-150 w-150 bottom-0 right-4 bg-white rounded-full")}>
+                                    <TouchableOpacity >
+                                            <AntDesign name="hearto" size={24} color="black" />
+                                    </TouchableOpacity>
+
+                                </View>
+
                                 <Image style={{flex:1 , width: undefined, height: undefined}}  source={{uri: card.photoURL}}></Image>
                             </View>
 
@@ -154,16 +168,29 @@ const styles = StyleSheet.create({
         height: "90%",
         marginLeft: -20,
 
-        backgroundColor: "blue",
+        // backgroundColor: "blue",
         width: '112%'
 
     },
     imgCardText : {
         // alignSelf: "stretch",
-        backgroundColor: "red",
+
         // flex: 1,
         fontFamily: "Chivo-Regular",
-        fontSize: 24
+        fontSize: 24,
+        marginTop: 12,
+        marginLeft: 9
+
+    },
+    imgCardTextAlt : {
+        // alignSelf: "stretch",
+
+        // flex: 1,
+        fontFamily: "Chivo-Regular",
+        fontSize: 18,
+        color: "#939393",
+        marginBottom: 9,
+        marginLeft: 9
 
     },
     imgCardSwipe: {
