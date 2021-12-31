@@ -5,6 +5,9 @@ import {
   Text,
   Dimensions,
   StyleSheet,
+  FlatList,
+  Image,
+  View
 } from 'react-native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
@@ -20,6 +23,7 @@ const DUMMY_DATA = [
         major: "Psychology",
         gradYear: 24,
         photoURL: "https://avatars.githubusercontent.com/u/84470596?v=4",
+        key:0
     },
     {   
         firstName: "Carolyn",
@@ -29,6 +33,7 @@ const DUMMY_DATA = [
         major: "Computer Science",
         gradYear: 24,
         photoURL: "https://avatars.githubusercontent.com/u/67798872?v=4",
+        key:1
     },
     {   
         firstName: "Suba",
@@ -38,16 +43,17 @@ const DUMMY_DATA = [
         major: "Computer Science",
         gradYear: 24,
         photoURL: "https://avatars.githubusercontent.com/u/18357230?v=4",
+        key:2
     },
 ]
 
-export default () => {
-    <SwiperFlatList
-        data={DUMMY_DATA}
-        index={0}
-        renderItem={({item}) => <Image style={{flex:1 , width: undefined, height: undefined}}  source={item.photoURL}/>}
+export default () => 
+<View>
+    <FlatList
+            data={DUMMY_DATA}
+            index={0}
+            renderItem={({item}) => <Image style={{width: 200, height: 400}} source={{uri: item.photoURL}}></Image>}
+    />
+</View>
 
-        
 
-/>
-}

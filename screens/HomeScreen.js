@@ -9,7 +9,7 @@ import { useFonts }from 'expo-font'
 import AppLoading from 'expo-app-loading';
 import Swiper from "react-native-deck-swiper"
 import { backgroundColor, color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
-import feedSwiper from '../screenComponents/feedSwiper';
+import FeedSwiper from '../screenComponents/FeedSwiper';
 
 
 
@@ -95,49 +95,9 @@ const HomeScreen = () => {
                 <View style={styles.headerLine}></View> */}
 
                 {/* cards */}
-                <View style={styles.imgCardSwipe}>
-                    <Swiper 
-                        cards={DUMMY_DATA}
-                        cardIndex={0}
-                        stackSize={3}
-                        animateCardOpacity
-                        disableBottomSwipe={true}
-                        horizontalSwipe={false}
-                        outputRotationRange={["0deg", "0deg", "0deg"]}
-                        showSecondCard={true}
-                        verticalThreshold={100}
-                        renderCard={(card) => 
-                            <View key={card.id} style={styles.imgCard}>
-                                <View>
-                                    <View>
-                                        <Text style={styles.imgCardText}>{card.firstName} - {card.college} '{card.gradYear}</Text>
-                                        <Text style={styles.imgCardTextAlt}>{card.age} years old | {card.major}</Text>
-                                    </View>
-                                    <TouchableOpacity style={tw("absolute right-4 top-4 green")}>
-                                        <Entypo name="dots-three-vertical" size={20} color="black" />
-                                    </TouchableOpacity>
-                                    
-                                    
-
-
-                                </View>
-                                {/* profile pics */}
-                                <Image style={{flex:1 , width: undefined, height: undefined}}  source={{uri: card.photoURL}}></Image>
-
-                                {/* buttons */}
-                                <TouchableOpacity style={tw("absolute bottom-20 right-4 bg-white rounded-full")}>
-                                        <Feather name="send" size={24} color="#B8EFFF" style={styles.cardButton} />
-                                </TouchableOpacity>
-                                <TouchableOpacity style={tw("absolute bottom-5 right-4 bg-white rounded-full")}>
-                                        <AntDesign name="hearto" size={24} color="#B8EFFF" style={styles.cardButton} />
-                                </TouchableOpacity>
-                                
-                            </View>
-
-                        }
-            
-                    />
-                </View>
+                
+                    <FeedSwiper></FeedSwiper>
+                
 
 
                 {/* end cards */}
