@@ -13,6 +13,8 @@ import {
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import tw from "tailwind-rn";
 import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+
 
 
 
@@ -55,10 +57,11 @@ const DUMMY_DATA = [
 
 export default () => 
 <SafeAreaView>
-    <FlatList
+
+            <FlatList
             data={DUMMY_DATA}
             index={0}
-            style={{marginBottom: 100}}
+            style={{marginBottom: 150}}
             showsVerticalScrollIndicator={false}
             snapToInterval={Dimensions.get("window").height - 127}
             snapToAlignment={"start"}
@@ -91,12 +94,18 @@ export default () =>
                     <AntDesign name="hearto" size={24} color="#B8EFFF" style={styles.cardButton} />
             </TouchableOpacity>
 
+  
+
             </View>
+            
             
         
         
         }
     />
+
+
+
 </SafeAreaView>
 
 
@@ -156,5 +165,12 @@ const styles = StyleSheet.create({
 
 
     },
+    // bottomBar: {
+    //     position: "absolute",
+    //     backgroundColor: "#FFFFFF",
+    //     height: 40,
+    //     width: "100%",
+    //     marginBottom: 0
+    // }
 })
 
