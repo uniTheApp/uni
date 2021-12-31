@@ -8,11 +8,12 @@ import {
   FlatList,
   Image,
   View,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import tw from "tailwind-rn";
 import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
+
 
 
 const { width, height } = Dimensions.get('window');
@@ -50,12 +51,18 @@ const DUMMY_DATA = [
     },
 ]
 
+
+
 export default () => 
 <SafeAreaView>
     <FlatList
             data={DUMMY_DATA}
             index={0}
             style={{marginBottom: 100}}
+            showsVerticalScrollIndicator={false}
+            snapToInterval={Dimensions.get("window").height - 127}
+            snapToAlignment={"start"}
+            decelerationRate={"fast"}
             renderItem={({item}) => 
             <View>
                 <View>
@@ -74,7 +81,15 @@ export default () =>
             
             
             
-            <Image style={{width: '100%', height: 400}} source={{uri: item.photoURL}}></Image>
+            <Image style={{width: '100%', height: Dimensions.get('window').height - 200}} source={{uri: item.photoURL}}></Image>
+
+
+            <TouchableOpacity style={tw("absolute bottom-20 right-4 bg-white rounded-full")}>
+                    <Feather name="send" size={24} color="#B8EFFF" style={styles.cardButton} />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw("absolute bottom-5 right-4 bg-white rounded-full")}>
+                    <AntDesign name="hearto" size={24} color="#B8EFFF" style={styles.cardButton} />
+            </TouchableOpacity>
 
             </View>
             
