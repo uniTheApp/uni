@@ -7,9 +7,12 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  View
+  View,
+  SafeAreaView
 } from 'react-native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
+import tw from "tailwind-rn";
+import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
 
 
 const { width, height } = Dimensions.get('window');
@@ -48,12 +51,95 @@ const DUMMY_DATA = [
 ]
 
 export default () => 
-<View>
+<SafeAreaView>
     <FlatList
             data={DUMMY_DATA}
             index={0}
-            renderItem={({item}) => <Image style={{width: 200, height: 400}} source={{uri: item.photoURL}}></Image>}
-    />
-</View>
+            style={{marginBottom: 100}}
+            renderItem={({item}) => 
+            <View>
+                <View>
+                <View>
+                    <Text style={styles.imgCardText}>{item.firstName} - {item.college} '{item.gradYear}</Text>
+                    <Text style={styles.imgCardTextAlt}>{item.age} years old | {item.major}</Text>
+                </View>
+                <TouchableOpacity style={tw("absolute right-4 top-4 green")}>
+                    <Entypo name="dots-three-vertical" size={20} color="black" />
+                </TouchableOpacity>
+            
+            
 
+
+            </View>
+            
+            
+            
+            <Image style={{width: '100%', height: 400}} source={{uri: item.photoURL}}></Image>
+
+            </View>
+            
+        
+        
+        }
+    />
+</SafeAreaView>
+
+
+const styles = StyleSheet.create({
+    headerText: {
+        textAlign: "center",
+        fontSize: 24,
+        fontFamily: "Chivo-Regular"
+    },
+    headerLine: {
+        borderBottomColor: "#9C9C9C",
+        borderBottomWidth: 1, 
+        marginTop: 10,
+        marginLeft: 9,
+        marginRight: 9,
+    },
+    imgCard: {
+        marginTop: -59,
+        height: "90%",
+        marginLeft: -20,
+
+        // backgroundColor: "blue",
+        width: '112%',
+        backgroundColor: "white"
+
+    },
+    imgCardText : {
+        // alignSelf: "stretch",
+
+        // flex: 1,
+        fontFamily: "Chivo-Regular",
+        fontSize: 24,
+        marginTop: 12,
+        marginLeft: 9
+
+    },
+    imgCardTextAlt : {
+        // alignSelf: "stretch",
+
+        // flex: 1,
+        fontFamily: "Chivo-Regular",
+        fontSize: 18,
+        color: "#939393",
+        marginBottom: 9,
+        marginLeft: 9
+
+    },
+    cardButton: {
+        // marginTop: -20,
+        // marginLeft: -20,
+        // backgroundColor: "transparent"
+        // marginRight: -20
+
+        margin: 10,
+
+
+
+
+    },
+})
 
