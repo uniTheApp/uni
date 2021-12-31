@@ -9,6 +9,7 @@ import { useFonts }from 'expo-font'
 import AppLoading from 'expo-app-loading';
 import Swiper from "react-native-deck-swiper"
 import { backgroundColor, color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import feedSwiper from '../screenComponents/feedSwiper';
 
 
 
