@@ -98,7 +98,7 @@ const HomeScreen = () => {
                     <Swiper 
                         cards={DUMMY_DATA}
                         cardIndex={0}
-                        stackSize={5}
+                        stackSize={3}
                         animateCardOpacity
                         disableBottomSwipe={true}
                         horizontalSwipe={false}
