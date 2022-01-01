@@ -61,9 +61,9 @@ export default () =>
             <FlatList
             data={DUMMY_DATA}
             index={0}
-            style={{marginBottom: 150}}
+            style={tw("mb-32")}
             showsVerticalScrollIndicator={false}
-            snapToInterval={Dimensions.get("window").height - 127}
+            snapToInterval={Dimensions.get("window").height - 163}
             snapToAlignment={"start"}
             decelerationRate={"fast"}
             renderItem={({item}) => 
@@ -84,7 +84,7 @@ export default () =>
             
             
             
-            <Image style={{width: '100%', height: Dimensions.get('window').height - 200}} source={{uri: item.photoURL}}></Image>
+            <Image style={{width: '100%', height: Dimensions.get('window').height - 244, marginBottom: 10}} source={{uri: item.photoURL}}></Image>
 
 
             <TouchableOpacity style={tw("absolute bottom-20 right-4 bg-white rounded-full")}>
