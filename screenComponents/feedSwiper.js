@@ -129,11 +129,11 @@ const FeedSwiper = () => {
 
                     
                     {/* buttons */}
-                    <TouchableOpacity style={tw("absolute bottom-20 right-4 bg-white rounded-full")}>
-                            <Feather name="send" size={24} color="#B8EFFF" style={styles.cardButton} />
+                    <TouchableOpacity style={tw("absolute bottom-36 right-2 bg-white rounded-full")}>
+                            <Feather name="send" size={26} color="#B8EFFF" style={styles.cardButton} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={tw("absolute bottom-5 right-4 bg-white rounded-full")}>
-                            <AntDesign name="hearto" size={24} color="#B8EFFF" style={styles.cardButton} />
+                    <TouchableOpacity style={tw("absolute bottom-20 right-2 bg-white rounded-full")}>
+                            <AntDesign name="hearto" size={26} color="#B8EFFF" style={styles.cardButton} />
                     </TouchableOpacity>
                     {/* end buttons */}
 
