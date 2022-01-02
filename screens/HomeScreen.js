@@ -83,56 +83,26 @@ const HomeScreen = () => {
                 <View style={styles.headerLine}></View>
                 {/* end of header */}
 
-
-                {/* body / swipe section */}
-                {/* <View>
-                    
-                    <Text style={styles.headerText}>USER - COLLEGE YEAR</Text>
-                    <TouchableOpacity style={tw("absolute right-4")}>
-                        <Ionicons name="filter" size={24} color="black" />
-                    </TouchableOpacity>
-                    
-                </View>
-                <View style={styles.headerLine}></View> */}
-
                 {/* cards */}
-                
-                    <FeedSwiper></FeedSwiper>
-                
-
-
+                <FeedSwiper></FeedSwiper>
                 {/* end cards */}
                 
-          
-    
-                {/* end of body */}
+                {/* Bottom Bar */}
                 <SafeAreaView style={tw("absolute bottom-10 bg-white w-full h-20 pt-6")} >
-                    
-                        {/* <TouchableOpacity style={tw("relative")}>
-                            <Ionicons name="filter" size={24} color="black" />
-                        </TouchableOpacity> */}
-                        <TouchableOpacity style={{position: "absolute", marginLeft: "15%", marginTop: "2%"}}>
-                            <Ionicons name="home-outline" size={30} color="black" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{position: "absolute", marginLeft: "36%", marginTop: "2%"}}>
-                            <AntDesign name="search1" size={30} color="black" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{position: "absolute", marginLeft: "57%", marginTop: "2%"}}>
-                            <MaterialCommunityIcons name="message-text-outline" size={30} color="black" />                        
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{position: "absolute", marginLeft: "78%", marginTop: "2%"}}>
-                            <Feather name="user" size={30} color="black" />                      
-                        </TouchableOpacity>
-
-                   
-                    
-                    
+                    <TouchableOpacity style={{position: "absolute", marginLeft: "15%", marginTop: "2%"}}>
+                        <Ionicons name="home-outline" size={30} color="black" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{position: "absolute", marginLeft: "36%", marginTop: "2%"}}>
+                        <AntDesign name="search1" size={30} color="black" />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Chat")} style={{position: "absolute", marginLeft: "57%", marginTop: "2%"}}>
+                        <MaterialCommunityIcons name="message-text-outline" size={30} color="black" />                        
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{position: "absolute", marginLeft: "78%", marginTop: "2%"}}>
+                        <Feather name="user" size={30} color="black" />                      
+                    </TouchableOpacity>
                 </SafeAreaView>
-
-
-    
-    
-
+                {/* end bottom bar */}
             </SafeAreaView>
         )
     }
