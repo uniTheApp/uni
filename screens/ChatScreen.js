@@ -1,11 +1,12 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { SafeAreaView, View, Text } from 'react-native'
 
 const ChatScreen = () => {
     return (
-        <View>
+        <SafeAreaView>
             <Text>I am the chat screen</Text>
-        </View>
+            
+        </SafeAreaView>
     )
 }
 
