@@ -25,6 +25,7 @@ import Carousel from './Carousel';
 const FeedSwiper = ({data}) => {
 
     const [profiles, setProfiles] = useState([]);
+    const swipeDist = Dimensions.get("window").height *.81
 
     useEffect(() => {
         let unsub;
@@ -56,8 +57,8 @@ const FeedSwiper = ({data}) => {
             index={0}
             style={tw("mb-32")}
             showsVerticalScrollIndicator={false}
-            snapToInterval={Dimensions.get("window").height - 162}
-            snapToAlignment={"center"}
+            snapToInterval={swipeDist}
+            snapToAlignment={"start"}
             decelerationRate={"fast"}
             renderItem={({item}) => item ? (
                 <View>
