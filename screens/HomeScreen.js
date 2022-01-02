@@ -59,6 +59,16 @@ const HomeScreen = () => {
             photoURL: "https://instagram.fagc1-2.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s750x750/248429970_921674231782724_8314217184271061258_n.jpg?_nc_ht=instagram.fagc1-2.fna.fbcdn.net&_nc_cat=108&_nc_ohc=zd7aBeE7cA4AX9Xp9OB&edm=AP_V10EBAAAA&ccb=7-4&oh=00_AT_lGq7qPXLDnMLF-byegh9tvTk7g-J0Vn5Xujk_NHkgvQ&oe=61D863FA&_nc_sid=4f375e",
             key:2
         },
+        {   
+            firstName: "Suba",
+            lastName: "Ramesh",
+            age: 19,
+            college: "Yale",
+            major: "Computer Science",
+            gradYear: 24,
+            photoURL: "https://instagram.fagc1-2.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s750x750/248429970_921674231782724_8314217184271061258_n.jpg?_nc_ht=instagram.fagc1-2.fna.fbcdn.net&_nc_cat=108&_nc_ohc=zd7aBeE7cA4AX9Xp9OB&edm=AP_V10EBAAAA&ccb=7-4&oh=00_AT_lGq7qPXLDnMLF-byegh9tvTk7g-J0Vn5Xujk_NHkgvQ&oe=61D863FA&_nc_sid=4f375e",
+            key:2
+        },
     ]
 
     

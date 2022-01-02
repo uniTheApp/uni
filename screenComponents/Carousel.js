@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Dimensions, FlatList, Animated } from 'react-native'
 import CarouselItem from './CarouselItem'
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 
 const { width, heigth } = Dimensions.get('window')
@@ -20,6 +22,7 @@ const Carousel = ({ data }) => {
     if (data && data.length) {
         return (
             <View>
+
                 <View style={styles.dotView}>
                     {data.map((_, i) => {
                         let opacity = position.interpolate({
@@ -36,6 +39,7 @@ const Carousel = ({ data }) => {
                     })}
 
                 </View>
+                
                 <FlatList data={data}
                 ref = {(flatList) => {this.flatList = flatList}}
                     keyExtractor={(item, index) => 'key' + index}
@@ -64,7 +68,7 @@ const Carousel = ({ data }) => {
 }
 
 const styles = StyleSheet.create({
-    dotView: { flexDirection: 'row', justifyContent: 'center', position: "absolute", zIndex: 100, alignSelf: 'center'}
+    dotView: { flexDirection: 'row', justifyContent: 'center', position: "absolute", zIndex: 100, alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.1)', borderBottomLeftRadius: 10, borderBottomRightRadius: 10}
 })
 
 export default Carousel
