@@ -1,8 +1,8 @@
-import { useNavigation } from '@react-navigation/native'
-import React from 'react'
-import {KeyboardAvoidingView, StyleSheet, TextInput, View, Text, Button, TouchableOpacity } from 'react-native'
-import { auth } from '../firebase'
-import useAuth from '../hooks/useAuth'
+import { useNavigation } from '@react-navigation/core'
+import React, { useEffect, useState } from 'react'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "@firebase/auth"
+import { auth } from "../firebase"
 
 const HomeScreen = () => {
 
@@ -22,9 +22,9 @@ const HomeScreen = () => {
 
     return (
         <View>
-            <Text>I am the home screen</Text>
+            <Text>\n\nI am the create user screen</Text>
             <Text>Email: {auth.currentUser?.email}</Text>
-            <Button title="Go to the Chat Screen" onPress={() => navigation.navigate("Chat")}></Button>
+            {/* <Button title="Go to the Chat Screen" onPress={() => navigation.navigate("Chat")}></Button> */}
 
             <TouchableOpacity
                 onPress={handleSignOut}
