@@ -18,6 +18,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useState, useEffect } from 'react/cjs/react.development';
 import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { db } from "../firebase"
+import Carousel from './Carousel';
 
 
 
@@ -56,7 +57,7 @@ const FeedSwiper = ({data}) => {
             style={tw("mb-32")}
             showsVerticalScrollIndicator={false}
             snapToInterval={Dimensions.get("window").height - 162}
-            snapToAlignment={"start"}
+            snapToAlignment={"center"}
             decelerationRate={"fast"}
             renderItem={({item}) => item ? (
                 <View>
@@ -73,7 +74,8 @@ const FeedSwiper = ({data}) => {
                     {/* end 2nd header */}
                 
                     {/* Image  */}
-                    <Image style={{width: '100%', height: Dimensions.get('window').height - 244, marginBottom: 10}} source={{uri: item.photoURL}}></Image>
+                    {/* <Image style={{width: '100%', height: Dimensions.get('window').height - 244, marginBottom: 10}} source={{uri: item.photoURL}}></Image> */}
+                    <Carousel data={data}></Carousel>
                     {/* end image */}
 
 
