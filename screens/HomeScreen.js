@@ -106,7 +106,7 @@ const HomeScreen = () => {
           
     
                 {/* end of body */}
-                <SafeAreaView style={tw("absolute bottom-10 border-t bg-white w-full h-20 pt-6")} >
+                <SafeAreaView style={tw("absolute bottom-10 bg-white w-full h-20 pt-6")} >
                     
                         {/* <TouchableOpacity style={tw("relative")}>
                             <Ionicons name="filter" size={24} color="black" />
