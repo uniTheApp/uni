@@ -37,22 +37,6 @@ const ProfileScreen = () => {
     OpenSansSemiBold: require("../assets/fonts/OpenSans-SemiBold.ttf"),
   });
 
-  // if (!fontsLoaded){
-  //     return <AppLoading></AppLoading>
-  // }
-  // else{
-  //     return (
-  //         <SafeAreaView style = {tw("bg-white")}>
-  //             <TopBar></TopBar>
-
-  //             <ProfilePictures> </ProfilePictures>
-
-  //             <BottomBar></BottomBar>
-
-  //         </SafeAreaView>
-  //     )
-  // }
-
   if (!fontsLoaded) {
     return null;
   } else {
