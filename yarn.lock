@@ -1056,6 +1056,11 @@
   resolved "https://registry.yarnpkg.com/@expo-google-fonts/chivo/-/chivo-0.2.0.tgz#ac657cc99c7e46a3cf51f77601cd85ed51ab9642"
   integrity sha512-G9bQf45rAPAislSVO3QVH2J7lJb7iOnVLu698VeZKRdT1MqEoSXE88v3gZud/FxkbjTrYno37zg6Lg4ZxbTkrA==
 
+"@expo-google-fonts/open-sans@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/open-sans/-/open-sans-0.2.0.tgz#59d94d5994e75afed4a576344533d321250b86a5"
+  integrity sha512-lbRUwBvVuFqotB3OBdYI5d0Jj848hM16gvfAL/dKMgzXsamvCfNFoRqWojCpJNXl0rrmdNkuQFBwxY3A4DtN9A==
+
 "@expo/config-plugins@4.0.15", "@expo/config-plugins@^4.0.2":
   version "4.0.15"
   resolved "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-4.0.15.tgz"

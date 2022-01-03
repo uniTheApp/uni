@@ -1,14 +1,14 @@
 
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Button, SafeAreaView, StyleSheet, Image, FlatList, Dimensions, TouchableOpacity } from 'react-native'
 import tw from "tailwind-rn";
-import { Ionicons } from "@expo/vector-icons"
-import { useNavigation } from '@react-navigation/native'
+import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
 
 
 const TopBar = () => {
-    const navigation = useNavigation();
 
+    const navigation = useNavigation();
+    
     return (
     <View>
         <View style={tw("items-center relative")} >
