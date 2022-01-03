@@ -25,6 +25,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import BottomBar from "../screenComponents/BottomBar";
 import TopBar from "../screenComponents/TopBar";
 import ProfilePictures from "../screenComponents/profilePictures";
+import FeedSwiper from "../screenComponents/FeedSwiper";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -42,7 +43,14 @@ const ProfileScreen = () => {
   } else {
     return (
       <SafeAreaView style={tw("bg-white")}>
-        <BottomBar></BottomBar>
+        {/* <TopBar> </TopBar> */}
+        <View>
+          <Text> hi </Text>
+        </View>
+
+        {/* <FeedSwiper> </FeedSwiper> */}
+
+        <BottomBar style={{ zIndex: 100 }}></BottomBar>
       </SafeAreaView>
       //   <View>
       //     <Text style={styles.topText}> Daniel </Text>
