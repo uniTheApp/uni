@@ -33,7 +33,7 @@ const Carousel = ({ data }) => {
                         return (
                             <Animated.View
                                 key={i}
-                                style={{ opacity, height: 10, width: 10, backgroundColor: '#B8EFFF', margin: 8, borderRadius: 5}}
+                                style={{ opacity, height: 10, width: 10, backgroundColor: '#B8EFFF', margin: 3.77, borderRadius: 5}}
                             />
                         )
                     })}
@@ -68,7 +68,7 @@ const Carousel = ({ data }) => {
 }
 
 const styles = StyleSheet.create({
-    dotView: { flexDirection: 'row', justifyContent: 'center', position: "absolute", zIndex: 100, alignSelf: 'center', backgroundColor: 'rgba(0, 0, 0, 0.1)', borderBottomLeftRadius: 10, borderBottomRightRadius: 10}
+    dotView: { flexDirection: 'row', justifyContent: 'center', position: "absolute", zIndex: 100, alignSelf: 'center', marginTop: 8, borderBottomLeftRadius: 10, borderBottomRightRadius: 10}
 })
 
 export default Carousel
