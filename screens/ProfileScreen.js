@@ -41,7 +41,7 @@ const ProfileScreen = () => {
     return null;
   } else {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={tw("bg-white")}>
         <BottomBar></BottomBar>
       </SafeAreaView>
       //   <View>
