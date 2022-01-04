@@ -104,9 +104,11 @@ const HomeScreen = () => {
                 {/* end cards */}
                 
                 {/* Bottom Bar */}
-                <BottomBar></BottomBar>
+                {/* <BottomBar></BottomBar> */}
+
                 {/* end bottom bar */}
             </SafeAreaView>
+            
         )
     }
 

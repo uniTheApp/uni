@@ -25,7 +25,7 @@ import Carousel from './Carousel';
 const FeedSwiper = ({data}) => {
 
     const [profiles, setProfiles] = useState([]);
-    const swipeDist = Dimensions.get("window").height *.81
+    
 
     useEffect(() => {
         let unsub;
@@ -55,11 +55,11 @@ const FeedSwiper = ({data}) => {
         <FlatList
             data={data}
             index={0}
-            style={tw("mb-32")}
             showsVerticalScrollIndicator={false}
-            snapToInterval={swipeDist}
-            snapToAlignment={"start"}
+            snapToInterval={Dimensions.get('window').height - 138}
+            snapToAlignment="start"
             decelerationRate={"fast"}
+            contentContainerStyle={{ paddingBottom: 138 }} 
             renderItem={({item}) => item ? (
                 <View>
                     {/* 2nd header */}
@@ -107,6 +107,7 @@ const FeedSwiper = ({data}) => {
 
 
                 </View>
+                
             
             ) : (
 
@@ -115,6 +116,7 @@ const FeedSwiper = ({data}) => {
 
             )}
         />
+
     </SafeAreaView>
 )}
 
