@@ -132,48 +132,49 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontFamily: "Chivo-Regular"
     },
-    {
-      firstName: "Carolyn",
-      lastName: "Qu",
-      age: 19,
-      college: "Yale",
-      major: "Computer Science",
-      gradYear: 24,
-      photoURL: "https://avatars.githubusercontent.com/u/67798872?v=4",
-    },
-    {
-      firstName: "Suba",
-      lastName: "Ramesh",
-      age: 19,
-      college: "Yale",
-      major: "Computer Science",
-      gradYear: 24,
-      photoURL: "https://avatars.githubusercontent.com/u/18357230?v=4",
-    },
-  ];
+    // {
+    //   firstName: "Carolyn",
+    //   lastName: "Qu",
+    //   age: 19,
+    //   college: "Yale",
+    //   major: "Computer Science",
+    //   gradYear: 24,
+    //   photoURL: "https://avatars.githubusercontent.com/u/67798872?v=4",
+    // },
+    // {
+    //   firstName: "Suba",
+    //   lastName: "Ramesh",
+    //   age: 19,
+    //   college: "Yale",
+    //   major: "Computer Science",
+    //   gradYear: 24,
+    //   photoURL: "https://avatars.githubusercontent.com/u/18357230?v=4",
+    // },
+})
+//   ];
 
-  let [fontsLoaded] = useFonts({
-    "Chivo-Regular": require("../assets/fonts/Chivo-Regular.ttf"),
-  });
+//   let [fontsLoaded] = useFonts({
+//     "Chivo-Regular": require("../assets/fonts/Chivo-Regular.ttf"),
+//   });
 
-  if (!fontsLoaded) {
-    // NEED TO CREATE A SPLASH SCREEN
-    return <AppLoading></AppLoading>;
-  } else {
-    return (
-      <SafeAreaView style={tw("bg-white")}>
-        <TopBar></TopBar>
+//   if (!fontsLoaded) {
+//     // NEED TO CREATE A SPLASH SCREEN
+//     return <AppLoading></AppLoading>;
+//   } else {
+//     return (
+//       <SafeAreaView style={tw("bg-white")}>
+//         <TopBar></TopBar>
 
-        {/* cards */}
-        <FeedSwiper></FeedSwiper>
-        {/* end cards */}
+//         {/* cards */}
+//         <FeedSwiper></FeedSwiper>
+//         {/* end cards */}
 
-        {/* Bottom Bar */}
-        <BottomBar></BottomBar>
-        {/* end bottom bar */}
-      </SafeAreaView>
-    );
-  }
-};
+//         {/* Bottom Bar */}
+//         <BottomBar></BottomBar>
+//         {/* end bottom bar */}
+//       </SafeAreaView>
+//     );
+//   }
+// };
 
 export default HomeScreen;
