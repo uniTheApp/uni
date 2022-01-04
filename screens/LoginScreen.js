@@ -15,7 +15,10 @@ const LoginScreen = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        navigation.replace("Home")
+        if(user.emailVerified())
+          navigation.replace("CreateUserScreen")//change to Home but for now
+        else
+          navigation.replace("VerifyEmail")
       }
     })
 
@@ -24,6 +27,7 @@ const LoginScreen = () => {
 
   const handleSignUp = async () => {
     const a = auth
+    //check if email
     createUserWithEmailAndPassword(a, email, password)
     .then(userCredentials => {
       const user = userCredentials.user;
@@ -35,12 +39,7 @@ const LoginScreen = () => {
       console.log("sent verification email")
     })
     
-    // setLoading(true)
-
-    // await createUserWithEmailAndPassword(email, password)
-    
     .catch(error => alert(error.message))
-    // .finally(() => setLoading(false))
 
   }
 

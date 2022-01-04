@@ -1,54 +1,41 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import {KeyboardAvoidingView, StyleSheet, TextInput, View, Text, Button, TouchableOpacity } from 'react-native'
-import {doc, getDoc} from '@firebase/firestore'
-import { auth, db } from '../firebase'
+import { auth } from '../firebase'
 import useAuth from '../hooks/useAuth'
 
-const HomeScreen = () => {
+const VerifyEmailScreen = () => {
 
     const navigation = useNavigation();
     const { logout } = useAuth();
-    const firstName = ""
-    
-    try{
-      const userDoc = getDoc(doc(db, "users", auth.currentUser.uid))
-      console.log("found user doc")
-    } catch (e){
-      console.log("could not find user doc")
-    }
-    
 
-    const handleSignOut = () => {
-        auth
-        .signOut()
-        .then(() => {
-            console.log("Logged out")
-            navigation.replace("Login")
-        })
-        .catch(error => alert(error.message))
-    }
+    checkForVerifiedInterval = setInterval(() => {
+        auth.currentUser
+          .reload()
+          .then(ok => {
+            if (auth.currentUser.emailVerified) {
+              console.log("email verified")
+              navigation.replace("CreateUser")//instead go to create profile?
+              clearInterval(checkForVerifiedInterval)
+
+            }
+            else{
+                console.log("not verified")
+            }
+          })
+      }, 1000)
 
 
     return (
         <View>
-            <Text>I am the home screen</Text>
+            <Text>I am the verification screen</Text>
             <Text>Email: {auth.currentUser?.email}</Text>
 
-            <Button title="Go to the Chat Screen" onPress={() => navigation.navigate("CreateUser")}></Button>
-
-            <TouchableOpacity
-                onPress={handleSignOut}
-                style={styles.button}
-            >
-                <Text style={styles.button}>Log Out</Text>
-
-            </TouchableOpacity>
         </View>
     )
 }
 
-export default HomeScreen
+export default VerifyEmailScreen
 
 const styles = StyleSheet.create({
     container: {
