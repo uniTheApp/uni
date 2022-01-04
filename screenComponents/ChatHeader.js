@@ -15,8 +15,8 @@ const ChatHeader = ({title, callEnabled}) => {
     return (
         <View style={tw("p-2 flex-row items-center justify-between")}>
             <View style={tw('flex flex-row items-center')}>
-                <TouchableOpacity onPress={ () => navigation.goBack()} style={{margin: "4%", backgroundColor: "#939393", borderRadius: 10}}>
-                    <Ionicons name="chevron-back-outline" size={32} color="#B8EFFF" style={{margin: 3}}></Ionicons>
+                <TouchableOpacity onPress={ () => navigation.goBack()}>
+                    <Ionicons name="chevron-back-outline" size={32} color="#939393" style={{margin: 3}}></Ionicons>
                 </TouchableOpacity>
                 <Text style={{fontSize: 34, marginLeft: "7%"}}>Chat</Text>
             </View>
