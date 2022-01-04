@@ -19,6 +19,7 @@ import { useState, useEffect } from 'react/cjs/react.development';
 import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { db } from "../firebase"
 import Carousel from './Carousel';
+import { styles } from "./Style"
 
 
 
