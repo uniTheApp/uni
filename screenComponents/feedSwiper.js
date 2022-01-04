@@ -59,7 +59,7 @@ const FeedSwiper = ({data}) => {
             snapToInterval={Dimensions.get('window').height - 138}
             snapToAlignment="start"
             decelerationRate={"fast"}
-            contentContainerStyle={{ paddingBottom: 138 }} 
+            contentContainerStyle={{ paddingBottom: "45%" }} 
             renderItem={({item}) => item ? (
                 <View>
                     {/* 2nd header */}
