@@ -21,7 +21,7 @@ const BottomBar = () => {
 
   //   tw("relative bottom-10 bg-white w-full h-20 pt-6");
   return (
-    <SafeAreaView style={tw("absolute align-bottom")}>
+    <SafeAreaView style={tw("absolute bottom-10 bg-white w-full h-20 pt-6")}>
       <TouchableOpacity
         onPress={() => navigation.navigate("Home")}
         style={{ position: "absolute", marginLeft: "15%", marginTop: "2%" }}

@@ -1,7 +1,36 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+//Carolyn NOTE: NEED TO MAKE THESE MORE CONSISTENT (like have a defined look for headers)
 const styles = StyleSheet.create({
+  //Profile
+
+  topText: {
+    textAlign: "center",
+    fontFamily: "OpenSansSemiBold",
+    fontSize: 20,
+  },
+  pictureContainer: {
+    display: "flex",
+    flexGrow: 1,
+    paddingTop: 19,
+    paddingLeft: 5,
+    paddingRight: 5,
+    // justifyContent: "space-evenly",
+    // flexWrap: "wrap",
+    // alignContent: "center",
+    alignItems: "center",
+    //backgroundColor: "black",
+  },
+  pictures: {
+    width: 84,
+    height: 84,
+    margin: 16,
+    borderRadius: 10,
+    //backgroundColor: "red",
+  },
+
+  //HOME
   headerText: {
     textAlign: "center",
     fontSize: 24,
