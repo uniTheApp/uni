@@ -178,4 +178,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default FeedSwiper
+export default FeedSwiper;
