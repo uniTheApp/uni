@@ -5,6 +5,32 @@ import { View, Text, StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   //Profile
 
+  boxFillIn: {
+    width: 110,
+    height: 32,
+    backgroundColor: "#F5F5F5",
+    paddingLeft: 6,
+    paddingTop: 9,
+  },
+  boxFillInText: {
+    fontFamily: "OpenSansRegular",
+    fontSize: 10,
+    textTransform: "capitalize",
+  },
+
+  rectContainer: {
+    width: 300,
+    height: 190,
+    borderWidth: 1,
+    borderColor: "#CDCDCD",
+    paddingTop: 14,
+    paddingLeft: 16,
+    paddingRight: 16,
+    marginLeft: 18,
+    marginTop: 4,
+    borderRadius: 5,
+  },
+
   topText: {
     textAlign: "center",
     fontFamily: "OpenSansSemiBold",
@@ -29,7 +55,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     //backgroundColor: "red",
   },
-
+  //there are some spacing issues I need to resolve lol
+  moduleHeaderText: {
+    fontFamily: "OpenSansRegular",
+    fontSize: 15,
+    color: "#939393",
+    textTransform: "capitalize",
+    paddingLeft: 21,
+    paddingTop: 11,
+  },
   //HOME
   headerText: {
     textAlign: "center",

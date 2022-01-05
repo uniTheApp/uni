@@ -16,6 +16,7 @@ import {
 } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import tw from "tailwind-rn";
 import { styles } from "./Style";
+import FillInBox from "./FillInBox";
 
 const profilePictures = ({ Data }) => {
   return (
@@ -27,7 +28,7 @@ const profilePictures = ({ Data }) => {
         </Text>
       </View>
 
-      {/* first three pictures here */}
+      {/* all pictures */}
       <View style={styles.pictureContainer}>
         <FlatList
           data={Data}
@@ -40,6 +41,14 @@ const profilePictures = ({ Data }) => {
             <Image style={styles.pictures} source={{ uri: item.photoURL }} />
           )}
         />
+      </View>
+
+      {/* Basic Module */}
+      <View>
+        <Text style={styles.moduleHeaderText}>Basics</Text>
+        <View style={styles.rectContainer}>
+          <FillInBox textQuestion={"Class Year"}> </FillInBox>
+        </View>
       </View>
     </SafeAreaView>
   );
