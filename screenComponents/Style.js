@@ -6,19 +6,28 @@ const styles = StyleSheet.create({
   //Profile
 
   boxFillIn: {
-    width: 110,
     height: 32,
     backgroundColor: "#F5F5F5",
     paddingLeft: 6,
     paddingTop: 9,
+    marginBottom: 11,
+  },
+  textInTheBox: {
+    display: "flex",
+    flexDirection: "row",
   },
   boxFillInText: {
     fontFamily: "OpenSansRegular",
     fontSize: 10,
+    marginRight: 18,
     textTransform: "capitalize",
   },
 
   rectContainer: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     width: 300,
     height: 190,
     borderWidth: 1,

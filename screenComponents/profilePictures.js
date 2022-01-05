@@ -16,7 +16,8 @@ import {
 } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import tw from "tailwind-rn";
 import { styles } from "./Style";
-import FillInBox from "./FillInBox";
+import SmallFillInBox from "./boxes/SmallFillInBox";
+import MediumFillInBox from "./boxes/MediumFillInBox";
 
 const profilePictures = ({ Data }) => {
   return (
@@ -47,8 +48,32 @@ const profilePictures = ({ Data }) => {
       <View>
         <Text style={styles.moduleHeaderText}>Basics</Text>
         <View style={styles.rectContainer}>
-          <FillInBox textQuestion={"Class Year"}> </FillInBox>
+          <SmallFillInBox
+            textQuestion={"Class Year"}
+            textAnswer={"2024"}
+          ></SmallFillInBox>
+          <SmallFillInBox
+            textQuestion={"Pronouns"}
+            textAnswer={"she/her"}
+          ></SmallFillInBox>
+          <MediumFillInBox
+            textQuestion={"Major"}
+            textAnswer={"Computer Science"}
+          ></MediumFillInBox>
+          <MediumFillInBox
+            textQuestion={"Second Major/Minor"}
+            textAnswer={"Economics"}
+          ></MediumFillInBox>
+          <MediumFillInBox
+            textQuestion={"Location"}
+            textAnswer={"Grace Hopper College"}
+          ></MediumFillInBox>
         </View>
+      </View>
+
+      <View>
+        <Text style={styles.moduleHeaderText}>Questions + Preferences</Text>
+        <View style={styles.rectContainer}></View>
       </View>
     </SafeAreaView>
   );
