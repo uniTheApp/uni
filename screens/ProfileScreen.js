@@ -22,7 +22,7 @@ import {
   color,
 } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import BottomBar from "../screenComponents/BottomBar";
+
 import TopBar from "../screenComponents/TopBar";
 import ProfilePictures from "../screenComponents/ProfilePictures";
 

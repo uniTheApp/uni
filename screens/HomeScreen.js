@@ -24,7 +24,6 @@ import {
 } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import FeedSwiper from "../screenComponents/FeedSwiper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import BottomBar from "../screenComponents/BottomBar";
 import TopBar from "../screenComponents/TopBar";
 
 const HomeScreen = () => {
