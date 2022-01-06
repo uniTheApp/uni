@@ -104,8 +104,7 @@ const HomeScreen = () => {
         <FeedSwiper data={DUMMY_DATA}></FeedSwiper>
         {/* end cards */}
 
-        {/* Bottom Bar */}
-        <BottomBar></BottomBar>
+        
 
         {/* end bottom bar */}
       </SafeAreaView>
