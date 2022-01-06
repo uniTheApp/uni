@@ -6,6 +6,8 @@ import ProfileScreen from './screens/ProfileScreen';
 import SearchScreen from './screens/SearchScreen';
 import LoginScreen from './screens/LoginScreen';
 import useAuth from './hooks/useAuth';
+import { Ionicons, MaterialCommunityIcons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
+
 
 
 const Tab = createBottomTabNavigator();
@@ -22,13 +24,37 @@ const TabNavigator = () => {
             screenOptions={{
                 headerShown: false,
             }}
+            tabBarOptions={{
+                showLabel: false,
+            }}
+
         >
             { user ? (
                 <>
-                    <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
-                    <Tab.Screen name="Search" component={SearchScreen}></Tab.Screen>
-                    <Tab.Screen name="Chat" component={ChatScreen}></Tab.Screen>
-                    <Tab.Screen name="Profile" component={ProfileScreen}></Tab.Screen>
+                    <Tab.Screen name="Home" component={HomeScreen}
+                    options={{
+                        tabBarIcon: ({focused}) => (
+                            <Ionicons name="home-outline" size={30} color={focused ? ("#565656") : "#9C9C9C" }/>
+                        )}}
+                    ></Tab.Screen>
+                    <Tab.Screen name="Search" component={SearchScreen}
+                    options={{
+                        tabBarIcon: ({focused}) => (
+                            <AntDesign name="search1" size={30} color={focused ? ("#565656") : "#9C9C9C" }/>
+                        )}}
+                    ></Tab.Screen>
+                    <Tab.Screen name="Chat" component={ChatScreen}
+                    options={{
+                        tabBarIcon: ({focused}) => (
+                            <MaterialCommunityIcons name="message-text-outline" size={30} color={focused ? ("#565656") : "#9C9C9C" }/>
+                        )}}
+                    ></Tab.Screen>
+                    <Tab.Screen name="Profile" component={ProfileScreen}
+                    options={{
+                        tabBarIcon: ({focused}) => (
+                            <Feather name="user" size={30} color={focused ? ("#565656") : "#9C9C9C" }/>
+                        )}}
+                    ></Tab.Screen>
 
 
                 </>
