@@ -56,7 +56,7 @@ const FeedSwiper = ({data}) => {
             data={data}
             index={0}
             showsVerticalScrollIndicator={false}
-            snapToInterval={Dimensions.get('window').height - 138}
+            snapToInterval={Dimensions.get('window').height - 163}
             snapToAlignment="start"
             decelerationRate={"fast"}
             contentContainerStyle={{ paddingBottom: "45%" }} 
