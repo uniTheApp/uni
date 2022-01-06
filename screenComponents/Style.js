@@ -1,5 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 
 //Carolyn NOTE: NEED TO MAKE THESE MORE CONSISTENT (like have a defined look for headers)
 const styles = StyleSheet.create({
@@ -28,29 +31,35 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    width: 300,
+    width: "90%",
     height: 190,
     borderWidth: 1,
     borderColor: "#CDCDCD",
     paddingTop: 14,
     paddingLeft: 16,
     paddingRight: 16,
-    marginLeft: 18,
+    marginLeft: "5%",
     marginTop: 4,
     borderRadius: 5,
+    //backgroundColor: "black",
   },
 
   topText: {
     textAlign: "center",
     fontFamily: "OpenSansSemiBold",
+    fontSize: 30,
+    paddingTop: 14,
+  },
+  collegeText: {
+    textAlign: "center",
+    fontFamily: "OpenSansSemiBold",
     fontSize: 20,
+    color: "#939393",
   },
   pictureContainer: {
     display: "flex",
     flexGrow: 1,
-    paddingTop: 19,
-    paddingLeft: 5,
-    paddingRight: 5,
+    marginTop: 10,
     // justifyContent: "space-evenly",
     // flexWrap: "wrap",
     // alignContent: "center",
@@ -58,9 +67,11 @@ const styles = StyleSheet.create({
     //backgroundColor: "black",
   },
   pictures: {
-    width: 84,
-    height: 84,
-    margin: 16,
+    width: 90,
+    height: 90,
+    marginTop: 12,
+    marginLeft: "5%",
+    marginRight: "5%",
     borderRadius: 10,
     //backgroundColor: "red",
   },
@@ -70,8 +81,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#939393",
     textTransform: "capitalize",
-    paddingLeft: 21,
-    paddingTop: 11,
+    marginLeft: "5%",
+    marginTop: 10,
   },
   //HOME
   headerText: {

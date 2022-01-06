@@ -74,7 +74,7 @@ const ProfileScreen = () => {
   } else {
     return (
       <SafeAreaView style={tw("bg-white")}>
-        {/* <TopBar></TopBar> */}
+        <TopBar></TopBar>
         <ProfilePictures Data={DUMMY_PHOTOS}> </ProfilePictures>
         {/* <BottomBar> </BottomBar> */}
       </SafeAreaView>
