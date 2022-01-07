@@ -5,11 +5,16 @@ import { auth } from '../firebase'
 import useAuth from '../hooks/useAuth'
 
 const VerifyEmailScreen = () => {
+  console.log("opened verify email page")
 
     const navigation = useNavigation();
-    const { logout } = useAuth();
+    const {handleSignOut} = useAuth()
 
     checkForVerifiedInterval = setInterval(() => {
+        if(auth.currentUser == null){
+          clearInterval(checkForVerifiedInterval)
+          return
+        }
         auth.currentUser
           .reload()
           .then(ok => {
@@ -17,20 +22,25 @@ const VerifyEmailScreen = () => {
               console.log("email verified")
               navigation.replace("CreateUser")//instead go to create profile?
               clearInterval(checkForVerifiedInterval)
-
+              return
             }
             else{
                 console.log("not verified")
             }
           })
-      }, 1000)
-
+    }, 1000)
 
     return (
         <View>
             <Text>I am the verification screen</Text>
             <Text>Email: {auth.currentUser?.email}</Text>
 
+            <TouchableOpacity
+              onPress={handleSignOut}
+              style={[styles.button, styles.buttonOutline]}
+            >
+              <Text style={styles.buttonOutlineText}>Log Out</Text>
+            </TouchableOpacity>
         </View>
     )
 }

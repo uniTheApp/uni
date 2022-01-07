@@ -1,34 +1,35 @@
 import { useNavigation } from '@react-navigation/native'
-import React from 'react'
+import {React, useEffect} from 'react'
 import {KeyboardAvoidingView, StyleSheet, TextInput, View, Text, Button, TouchableOpacity } from 'react-native'
 import {doc, getDoc} from '@firebase/firestore'
 import { auth, db } from '../firebase'
 import useAuth from '../hooks/useAuth'
+// import {handleSignOut} from useAuth
 
 const HomeScreen = () => {
 
     const navigation = useNavigation();
-    const { logout } = useAuth();
-    const firstName = ""
-    
-    try{
-      const userDoc = getDoc(doc(db, "users", auth.currentUser.uid))
-      console.log("found user doc")
-    } catch (e){
-      console.log("could not find user doc")
-    }
-    
+    const { user, handleSignOut } = useAuth();
+    console.log("home screen")
+    // try{
+    //   const userDoc = getDoc(doc(db, "users", auth.currentUser.uid))
+    //   console.log("found user doc")
+    // } catch (e){
+    //   console.log("could not find user doc")
+    // }
 
-    const handleSignOut = () => {
-        auth
-        .signOut()
-        .then(() => {
-            console.log("Logged out")
-            navigation.replace("Login")
-        })
-        .catch(error => alert(error.message))
-    }
-
+    useEffect(() => {
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        if (user) {
+          if(!user.emailVerified)
+            navigation.navigate("VerifyEmail")
+        }else{
+          navigation.navigate("LoginScreen")
+        }
+      })
+  
+      return unsubscribe
+    }, [])
 
     return (
         <View>

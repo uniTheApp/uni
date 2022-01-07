@@ -3,55 +3,40 @@ import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendEmailVerification } from "@firebase/auth"
 import { auth } from "../firebase"
+import useAuth from "../hooks/useAuth"
+
+/*
+Note: convert to using useAuth so it can clean stuff up
+*/
+
 
 const LoginScreen = () => {
+  // console.log("login screen")
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [user, setUser] = useState('')
   const [loadingInitial, setLoadingInitial] = useState(true)
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation()
+  const {handleLogin, handleSignUp} = useAuth()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        if(user.emailVerified())
-          navigation.replace("CreateUserScreen")//change to Home but for now
+        console.log("auth state changed")
+        if(user.emailVerified)
+          navigation.navigate("Home")
         else
-          navigation.replace("VerifyEmail")
+          navigation.navigate("VerifyEmail")
+      }else{
+        console.log("no user?")
       }
     })
 
     return unsubscribe
   }, [])
 
-  const handleSignUp = async () => {
-    const a = auth
-    //check if email
-    createUserWithEmailAndPassword(a, email, password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log('Registered with:', user.email);
-      sendEmailVerification(user)
-      
-    })
-    .then(() => {
-      console.log("sent verification email")
-    })
-    
-    .catch(error => alert(error.message))
-
-  }
-
-  const handleLogin = () => {
-    const a = auth
-    signInWithEmailAndPassword(a, email, password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log('Login with:', user.email);
-    })
-    .catch(error => alert(error.message))
-  }
 
   return (
     <KeyboardAvoidingView
@@ -76,13 +61,13 @@ const LoginScreen = () => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={handleLogin}
+          onPress={() => handleLogin(email, password)}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleSignUp}
+          onPress={() => handleSignUp(email, password)}
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>

@@ -11,6 +11,7 @@ const CreateUserScreen = () => {
   const [birthday, setBirthday] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  const [image, setImage] = useState(null)
   const [loadingInitial, setLoadingInitial] = useState(true)
   const [loading, setLoading] = useState(false);
 
@@ -24,6 +25,7 @@ const CreateUserScreen = () => {
               email: auth.currentUser.email,
               firstName: firstName,
               lastName: lastName,
+              photoURL: image,
               userId: auth.currentUser.uid
 
           })
