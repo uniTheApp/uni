@@ -5,26 +5,39 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, se
 import {doc, setDoc} from "@firebase/firestore"
 import { auth, db } from "../firebase"
 import first from 'ee-first'
+import UploadImage from '../screenComponents/UploadImage'
 
 const CreateUserScreen = () => {
   const [email, setEmail] = useState('')
-  const [birthday, setBirthday] = useState('')
+  const [age, setAge] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  const [college, setCollege] = useState('')
+  const [gradYear, setGradYear] = useState('')
+  const [major, setMajor] = useState('')
+
   const [image, setImage] = useState(null)
   const [loadingInitial, setLoadingInitial] = useState(true)
   const [loading, setLoading] = useState(false);
+
+  // const [image, setImage] = useState(null);
+  // const [uploading, setUploading] = useState(false);
+  // const [transferred, setTransferred] = useState(0);
+
 
   const navigation = useNavigation()
 
   const loadUser = () => {
     auth.onAuthStateChanged(async function(user)  {
       if(user){
-          await setDoc(doc(db, "users", auth.currentUser.uid), {
-              birthday: new Date().toISOString(), //current date rn
+          setDoc(doc(db, "users", auth.currentUser.uid), {
+              age: age, //current date rn
               email: auth.currentUser.email,
               firstName: firstName,
               lastName: lastName,
+              college: college,
+              gradYear: gradYear,
+              major: major,
               photoURL: image,
               userId: auth.currentUser.uid
 
@@ -48,15 +61,47 @@ const CreateUserScreen = () => {
         <TextInput
           placeholder="First Name"
           value={firstName}
-          onChangeText={text => setFirstName(text)}
+          onChangeText={setFirstName}
           style={styles.input}
         />
         <TextInput
           placeholder="Last Name"
           value={lastName}
-          onChangeText={text => setLastName(text)}
+          onChangeText={setLastName}
           style={styles.input}
         />
+        <TextInput
+            placeholder="Age"
+            value={age}
+            onChangeText={setAge}
+            style={styles.input}
+        />
+        <TextInput
+            placeholder="College"
+            value={college}
+            onChangeText={setCollege}
+            style={styles.input}
+        />
+        <TextInput
+            placeholder="Grad Year"
+            value={gradYear}
+            onChangeText={setGradYear}
+            style={styles.input}
+        />
+        <TextInput
+            placeholder="Major"
+            value={major}
+            onChangeText={setMajor}
+            style={styles.input}
+        />
+        <TextInput
+            placeholder="Profile Pic"
+            value={image}
+            onChangeText={setImage}
+            style={styles.input}
+        />
+
+        <UploadImage></UploadImage>
       </View>
 
       <View style={styles.buttonContainer}>
