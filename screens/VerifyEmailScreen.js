@@ -1,55 +1,51 @@
 import { useNavigation } from '@react-navigation/native'
-import {React, useEffect} from 'react'
+import React from 'react'
 import {KeyboardAvoidingView, StyleSheet, TextInput, View, Text, Button, TouchableOpacity } from 'react-native'
-import {doc, getDoc} from '@firebase/firestore'
-import { auth, db } from '../firebase'
+import { auth } from '../firebase'
 import useAuth from '../hooks/useAuth'
-// import {handleSignOut} from useAuth
 
-const HomeScreen = () => {
+const VerifyEmailScreen = () => {
+  console.log("opened verify email page")
 
     const navigation = useNavigation();
-    const { user, handleSignOut } = useAuth();
-    console.log("home screen")
-    // try{
-    //   const userDoc = getDoc(doc(db, "users", auth.currentUser.uid))
-    //   console.log("found user doc")
-    // } catch (e){
-    //   console.log("could not find user doc")
-    // }
+    const {handleSignOut} = useAuth()
 
-    useEffect(() => {
-      const unsubscribe = auth.onAuthStateChanged(user => {
-        if (user) {
-          if(!user.emailVerified)
-            navigation.navigate("VerifyEmail")
-        }else{
-          navigation.navigate("LoginScreen")
+    checkForVerifiedInterval = setInterval(() => {
+        if(auth.currentUser == null){
+          clearInterval(checkForVerifiedInterval)
+          return
         }
-      })
-  
-      return unsubscribe
-    }, [])
+        auth.currentUser
+          .reload()
+          .then(ok => {
+            if (auth.currentUser.emailVerified) {
+              console.log("email verified")
+              navigation.replace("CreateUser")//instead go to create profile?
+              clearInterval(checkForVerifiedInterval)
+              return
+            }
+            else{
+                console.log("not verified")
+            }
+          })
+    }, 1000)
 
     return (
         <View>
-            <Text>I am the home screen</Text>
+            <Text>I am the verification screen</Text>
             <Text>Email: {auth.currentUser?.email}</Text>
 
-            <Button title="Go to the Chat Screen" onPress={() => navigation.navigate("CreateUser")}></Button>
-
             <TouchableOpacity
-                onPress={handleSignOut}
-                style={styles.button}
+              onPress={handleSignOut}
+              style={[styles.button, styles.buttonOutline]}
             >
-                <Text style={styles.button}>Log Out</Text>
-
+              <Text style={styles.buttonOutlineText}>Log Out</Text>
             </TouchableOpacity>
         </View>
     )
 }
 
-export default HomeScreen
+export default VerifyEmailScreen
 
 const styles = StyleSheet.create({
     container: {

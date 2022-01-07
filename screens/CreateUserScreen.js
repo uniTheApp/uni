@@ -2,41 +2,42 @@ import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendEmailVerification } from "@firebase/auth"
-import { auth } from "../firebase"
-import useAuth from "../hooks/useAuth"
+import {doc, setDoc} from "@firebase/firestore"
+import { auth, db } from "../firebase"
+import first from 'ee-first'
 
-/*
-Note: convert to using useAuth so it can clean stuff up
-*/
-
-
-const LoginScreen = () => {
-  // console.log("login screen")
+const CreateUserScreen = () => {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [user, setUser] = useState('')
+  const [birthday, setBirthday] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [image, setImage] = useState(null)
   const [loadingInitial, setLoadingInitial] = useState(true)
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation()
-  const {handleLogin, handleSignUp} = useAuth()
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        console.log("auth state changed")
-        if(user.emailVerified)
-          navigation.navigate("Home")
-        else
-          navigation.navigate("VerifyEmail")
-      }else{
-        console.log("no user?")
-      }
-    })
+  const loadUser = () => {
+    auth.onAuthStateChanged(async function(user)  {
+      if(user){
+          await setDoc(doc(db, "users", auth.currentUser.uid), {
+              birthday: new Date().toISOString(), //current date rn
+              email: auth.currentUser.email,
+              firstName: firstName,
+              lastName: lastName,
+              photoURL: image,
+              userId: auth.currentUser.uid
 
-    return unsubscribe
-  }, [])
-
+          })
+          // db.doc('/users/${auth.currentUser.userId}').set(userCredentials)
+          console.log(`just set doc /users/${auth.currentUser.uid}`)
+        }
+        else{
+          console.log("no user")
+        }
+      })
+      navigation.navigate("Home")
+  }
 
   return (
     <KeyboardAvoidingView
@@ -45,39 +46,32 @@ const LoginScreen = () => {
     >
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={text => setEmail(text)}
+          placeholder="First Name"
+          value={firstName}
+          onChangeText={text => setFirstName(text)}
           style={styles.input}
         />
         <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={text => setPassword(text)}
+          placeholder="Last Name"
+          value={lastName}
+          onChangeText={text => setLastName(text)}
           style={styles.input}
-          secureTextEntry
         />
       </View>
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => handleLogin(email, password)}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleSignUp(email, password)}
+          onPress={loadUser}
           style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+          <Text style={styles.buttonOutlineText}>Done</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   )
 }
 
-export default LoginScreen
+export default CreateUserScreen
 
 const styles = StyleSheet.create({
   container: {
