@@ -9,11 +9,11 @@ const styles = StyleSheet.create({
   //Profile
 
   boxFillIn: {
-    height: 32,
+    height: 50, //32
     backgroundColor: "#F5F5F5",
-    paddingLeft: 6,
-    paddingTop: 9,
-    marginBottom: 11,
+    paddingLeft: 8,
+    paddingTop: 15,
+    marginBottom: 10,
   },
   textInTheBox: {
     display: "flex",
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
   },
   boxFillInText: {
     fontFamily: "OpenSansRegular",
-    fontSize: 10,
-    marginRight: 18,
+    fontSize: 15,
+    marginRight: 8,
     textTransform: "capitalize",
   },
 
@@ -32,22 +32,25 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     width: "90%",
-    height: 190,
-    borderWidth: 1,
+    //calc: 15 + 15 + 50 * num of box + 10 * num of box
+    height: 510, //330
+    //borderWidth: 1,
     borderColor: "#CDCDCD",
-    paddingTop: 14,
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingTop: 15,
+    // paddingLeft: "4%",
+    // paddingRight: "4%",
     marginLeft: "5%",
     marginTop: 4,
     borderRadius: 5,
-    //backgroundColor: "black",
+    // backgroundColor: "black",
   },
 
+  //name is put as editable an
+  //putting yale university in basics (but non editable)
   topText: {
     textAlign: "center",
     fontFamily: "OpenSansSemiBold",
-    fontSize: 30,
+    fontSize: 20,
     paddingTop: 14,
   },
   collegeText: {
@@ -60,6 +63,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexGrow: 1,
     marginTop: 10,
+    marginBottom: 10,
     // justifyContent: "space-evenly",
     // flexWrap: "wrap",
     // alignContent: "center",
@@ -75,15 +79,29 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     //backgroundColor: "red",
   },
+  circleButton: {
+    width: 18,
+    height: 18,
+    borderRadius: 18 / 2,
+    backgroundColor: "#565656",
+  },
+  moduleHeaderContainer: {
+    display: "flex",
+    flexDirection: "row",
+    //backgroundColor: "black",
+    //paddingTop: "5%",
+  },
   //there are some spacing issues I need to resolve lol
   moduleHeaderText: {
     fontFamily: "OpenSansRegular",
-    fontSize: 15,
+    fontSize: 20,
     color: "#939393",
     textTransform: "capitalize",
     marginLeft: "5%",
-    marginTop: 10,
+    // paddingRight: "70%",
+    // marginTop: 10,
   },
+  editIcon: {},
   //HOME
   headerText: {
     textAlign: "center",

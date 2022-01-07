@@ -16,48 +16,72 @@ import {
   color,
 } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import tw from "tailwind-rn";
+import {
+  Ionicons,
+  Entypo,
+  AntDesign,
+  Feather,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { styles } from "./Style";
 import SmallFillInBox from "./boxes/SmallFillInBox";
 import MediumFillInBox from "./boxes/MediumFillInBox";
 import LargeFillInBox from "./boxes/LargeFillInBox";
+import PictureEdit from "./items/PictureEdit";
 
 const profilePictures = ({ Data }) => {
   return (
     <SafeAreaView>
-      <View>
-        <Text style={[styles.topText]}>Daniel</Text>
-        <Text style={[styles.collegeText]}>Yale University</Text>
-      </View>
+      {/* <View> */}
+      {/* <Text style={[styles.topText]}>Yale University</Text> */}
+      {/* <Text style={[styles.collegeText]}>Yale University</Text> */}
+      {/* </View> */}
 
       {/* all pictures */}
-      <View style={styles.pictureContainer}>
+      <View>
         <FlatList
           data={Data}
+          scrollEnabled="false"
+          keyExtractor={(item, index) => item.key}
           //style={{ position: "absolute", bottom: 80 }}
           //carolyn note: not too sure why but you need key in order to change columns
           //may want to change this lol and just use wrapping
           numColumns={3}
           key={3}
-          renderItem={({ item }) => (
-            <Image style={styles.pictures} source={{ uri: item.photoURL }} />
+          renderItem={({ item, index }) => (
+            <View style={styles.pictureContainer}>
+              <Image style={styles.pictures} source={{ uri: item.photoURL }} />
+            </View>
           )}
         />
+        {/* <PictureEdit></PictureEdit> */}
       </View>
       <View style={{ flexGrow: 1 }}>
         {/* CAROLYN NOTE: this percentage is kinda messed up ngl, need to do some calculations */}
-        <ScrollView style={{ height: "54%" }}>
+        <ScrollView style={{ height: "63%" }}>
           {/* Basic Module */}
           <View>
-            <Text style={styles.moduleHeaderText}>Basics</Text>
+            <View style={styles.moduleHeaderContainer}>
+              <Text style={styles.moduleHeaderText}>Basics</Text>
+              {/* <MaterialIcons name="edit" size={25} color="#939393" /> */}
+            </View>
             <View style={styles.rectContainer}>
-              <SmallFillInBox
+              <MediumFillInBox
+                textQuestion={"First Name"}
+                textAnswer={"Daniel"}
+              ></MediumFillInBox>
+              <MediumFillInBox
+                textQuestion={"University"}
+                textAnswer={"Yale University"}
+              ></MediumFillInBox>
+              <MediumFillInBox
                 textQuestion={"Class Year"}
                 textAnswer={"2024"}
-              ></SmallFillInBox>
-              <SmallFillInBox
+              ></MediumFillInBox>
+              <MediumFillInBox
                 textQuestion={"Pronouns"}
-                textAnswer={"she/her"}
-              ></SmallFillInBox>
+                textAnswer={"they/them"}
+              ></MediumFillInBox>
               <MediumFillInBox
                 textQuestion={"Major"}
                 textAnswer={"Computer Science"}
@@ -70,12 +94,18 @@ const profilePictures = ({ Data }) => {
                 textQuestion={"Location"}
                 textAnswer={"Grace Hopper College"}
               ></MediumFillInBox>
+              <MediumFillInBox
+                textQuestion={"Height"}
+                textAnswer={"5'5\""}
+              ></MediumFillInBox>
             </View>
           </View>
 
           <View>
-            <Text style={styles.moduleHeaderText}>Questions + Preferences</Text>
-            <View style={[styles.rectContainer, { height: 450 }]}>
+            <Text style={[styles.moduleHeaderText, { marginTop: 10 }]}>
+              Questions + Preferences
+            </Text>
+            <View style={[styles.rectContainer, { height: 550 }]}>
               <MediumFillInBox
                 textQuestion={"Where do you wanna go now?"}
               ></MediumFillInBox>
