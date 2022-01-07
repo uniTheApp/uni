@@ -9,10 +9,13 @@ import {
   Alert,
   Image
 } from 'react-native';
-import {launchImageLibrary} from 'react-native-image-picker';
+import * as ImagePicker from 'expo-image-picker'
 // import storage from '@react-native-firebase/storage';
 // import * as Progress from 'react-native-progress';
 import useAuth from '../hooks/useAuth';
+import {doc, setDoc, updateDoc} from "@firebase/firestore"
+import { auth, db } from "../firebase"
+import {getStorage, ref, uploadBytes, now} from "@firebase/storage"
 
 const UploadImage = () => {
     const [image, setImage] = useState(null);
@@ -20,77 +23,38 @@ const UploadImage = () => {
     const [transferred, setTransferred] = useState(0);
 
     const {user} = useAuth();
+    const storage = getStorage();
 
-    const selectImage = () => {
-        console.log("trying to select image")
-        const options = {};
+    const selectImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [9, 16],
+            quality: 1,
+          });
+      
+          console.log(result);
+      
+          if (!result.cancelled) {
+            setImage(result.uri);
+            uploadImage(result.uri, `images/${auth.currentUser.uid}/` + new Date().toString())
+          }
+    };
 
-        launchImageLibrary(options, response => {
-            console.log("response", response);
-        }
-            //   if (response.didCancel) {
-        //     console.log('User cancelled image picker');
-        //   } else if (response.error) {
-        //     console.log('ImagePicker Error: ', response.error);
-        //   } else if (response.customButton) {
-        //     console.log('User tapped custom button: ', response.customButton);
-        //   } else {
-        //     const source = { uri: response.uri };
-        //     console.log(source);
-        //     setImage(source);
-        //   }
-        // }
-        );
-      };
-
-    //   const uploadImage = async () => {
-    //     const { uri } = image;
-    //     const filename = uri.substring(uri.lastIndexOf('/') + 1);
-    //     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-    //     setUploading(true);
-    //     setTransferred(0);
-    //     const task = storage()
-    //       .ref(filename)
-    //       .putFile(uploadUri);
-    //     // set progress state
-    //     task.on('state_changed', snapshot => {
-    //       setTransferred(
-    //         Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000
-    //       );
-    //     });
-    //     try {
-    //       await task;
-    //     } catch (e) {
-    //       console.error(e);
-    //     }
-    //     setUploading(false);
-    //     Alert.alert(
-    //       'Photo uploaded!',
-    //       'Your photo has been uploaded to Firebase Cloud Storage!'
-    //     );
-    //     setImage(null);
-    //   };
+    const uploadImage = async (uri, imageName) => {
+        const response = await fetch(uri)
+        const blob = await response.blob()
+        
+        var reference = ref(storage, imageName);
+        console.log(reference)
+        return uploadBytes(reference, blob)
+        // updateDoc(doc(db, "users", auth.currentUser.uid), {image: blob})
+    }
 
       return (
-        <SafeAreaView style={styles.container}>
           <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
             <Text style={styles.buttonText}>Pick an image</Text>
           </TouchableOpacity>
-          <View style={styles.imageContainer}>
-            {image !== null ? (
-              <Image source={{ uri: image.uri }} style={styles.imageBox} />
-            ) : null}
-            {uploading ? (
-              <View style={styles.progressBarContainer}>
-                <Progress.Bar progress={transferred} width={300} />
-              </View>
-            ) : (
-              <TouchableOpacity style={styles.uploadButton} onPress={() => {}}>
-                <Text style={styles.buttonText}>Upload image</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-        </SafeAreaView>
       )
 }
 

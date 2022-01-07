@@ -94,14 +94,10 @@ const CreateUserScreen = () => {
             onChangeText={setMajor}
             style={styles.input}
         />
-        <TextInput
-            placeholder="Profile Pic"
-            value={image}
-            onChangeText={setImage}
-            style={styles.input}
-        />
-
+        
         <UploadImage></UploadImage>
+
+        
       </View>
 
       <View style={styles.buttonContainer}>
