@@ -24,6 +24,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import TopBar from "../screenComponents/TopBar";
+import PictureEdit from "../screenComponents/items/PictureEdit";
 import ProfilePictures from "../screenComponents/ProfilePictures";
 
 const ProfileScreen = () => {
