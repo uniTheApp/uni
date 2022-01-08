@@ -19,26 +19,29 @@ import { useState, useEffect } from 'react/cjs/react.development';
 import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { db } from "../firebase"
 import Carousel from './Carousel';
+import useAuth from '../hooks/useAuth'
 
 
 
 const FeedSwiper = ({data}) => {
-
-    const [profiles, setProfiles] = useState([]);
     
+    // console.log(data)
+    
+    const [profiles, setProfiles] = useState([]);
+    const {user} = useAuth();
 
     useEffect(() => {
         let unsub;
 
         const fetchCards = async () => {
-            unsub = onSnapshot(collection(db, "users", snapshot => {
+            unsub = onSnapshot(collection(db, "users"), snapshot => {
                 setProfiles(
-                    snapshot.docs.map(doc => ({
+                    snapshot.docs.filter(doc => doc.id !== user.uid).map(doc => ({
                         id: doc.id,
                         ...doc.data()
                     }))
                 )
-            }))
+            })
         }
 
 
@@ -46,14 +49,15 @@ const FeedSwiper = ({data}) => {
         return unsub
     }, [])
 
-    
+    console.log("profiles: ")
+    console.log(profiles)
 
      return (
      
-     <SafeAreaView>
+    <SafeAreaView>
 
         <FlatList
-            data={data}
+            data={profiles}
             index={0}
             showsVerticalScrollIndicator={false}
             snapToInterval={Dimensions.get('window').height - 163}
@@ -76,7 +80,7 @@ const FeedSwiper = ({data}) => {
                 
                     {/* Image  */}
                     {/* <Image style={{width: '100%', height: Dimensions.get('window').height - 244, marginBottom: 10}} source={{uri: item.photoURL}}></Image> */}
-                    <Carousel data={data}></Carousel>
+                    <Carousel data={profiles}></Carousel>
                     {/* end image */}
 
 
