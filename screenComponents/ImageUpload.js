@@ -17,7 +17,7 @@ import {doc, setDoc, updateDoc} from "@firebase/firestore"
 import { auth, db } from "../firebase"
 import {getStorage, ref, uploadBytes, now} from "@firebase/storage"
 
-const UploadImage = () => {
+const ImageUpload = () => {
     const [image, setImage] = useState(null);
     const [uploading, setUploading] = useState(false);
     const [transferred, setTransferred] = useState(0);
@@ -37,11 +37,11 @@ const UploadImage = () => {
       
           if (!result.cancelled) {
             setImage(result.uri);
-            uploadImage(result.uri, `images/${auth.currentUser.uid}/` + new Date().toString())
+            ImageUpload(result.uri, `images/${auth.currentUser.uid}/` + new Date().toString())
           }
     };
 
-    const uploadImage = async (uri, imageName) => {
+    const ImageUpload = async (uri, imageName) => {
         const response = await fetch(uri)
         const blob = await response.blob()
         
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
     }
   });
 
-  export default UploadImage;
+  export default ImageUpload;

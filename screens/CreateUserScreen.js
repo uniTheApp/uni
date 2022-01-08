@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, se
 import {doc, setDoc} from "@firebase/firestore"
 import { auth, db } from "../firebase"
 import first from 'ee-first'
-import UploadImage from '../screenComponents/UploadImage'
+import ImageUpload from '../screenComponents/ImageUpload'
 
 const CreateUserScreen = () => {
   const [email, setEmail] = useState('')
@@ -95,7 +95,7 @@ const CreateUserScreen = () => {
             style={styles.input}
         />
         
-        <UploadImage></UploadImage>
+        <ImageUpload></ImageUpload>
 
         
       </View>
