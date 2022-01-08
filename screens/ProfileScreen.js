@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import useAuth from "../hooks/useAuth";
 import tw from "tailwind-rn";
+import styles from "../screenComponents/Style"
 import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -24,7 +25,6 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import TopBar from "../screenComponents/TopBar";
-import PictureEdit from "../screenComponents/items/PictureEdit";
 import ProfilePictures from "../screenComponents/ProfilePictures";
 
 const ProfileScreen = () => {
@@ -62,7 +62,7 @@ const ProfileScreen = () => {
   ];
 
   const navigation = useNavigation();
-  const { user, logout } = useAuth();
+  const { user, handleSignOut } = useAuth();
 
   let [fontsLoaded] = useFonts({
     OpenSansRegular: require("../assets/fonts/OpenSans-Regular.ttf"),
@@ -78,17 +78,22 @@ const ProfileScreen = () => {
         <TopBar></TopBar>
         <ProfilePictures Data={DUMMY_PHOTOS}> </ProfilePictures>
         {/* <BottomBar> </BottomBar> */}
+        <TouchableOpacity
+          onPress={handleSignOut}
+        >
+          <Text>Sign Out</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     );
   }
 };
 
-const styles = StyleSheet.create({
-  topText: {
-    textAlign: "center",
-    fontFamily: "OpenSansSemiBold",
-    fontSize: 50,
-  },
-});
+// const styles = StyleSheet.create({
+//   topText: {
+//     textAlign: "center",
+//     fontFamily: "OpenSansSemiBold",
+//     fontSize: 50,
+//   },
+// });
 
 export default ProfileScreen;
