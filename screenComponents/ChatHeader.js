@@ -14,15 +14,15 @@ const ChatHeader = ({title, callEnabled}) => {
 
     return (
         <View style={tw("p-2 flex-row items-center justify-between")}>
-            <View style={tw('flex flex-row items-center')}>
-                <TouchableOpacity onPress={ () => navigation.goBack()}>
-                    <Ionicons name="chevron-back-outline" size={32} color="#939393" style={{margin: 3, backgroundColor: "blue"}}></Ionicons>
+            {/* <View style={tw('flex flex-row items-center')}> */}
+                <TouchableOpacity style={{marginLeft: 10, backgroundColor: "#F5F5F5", borderRadius: 4}} onPress={ () => navigation.goBack()}>
+                    <Ionicons name="chevron-back-outline" size={32} color="#939393"></Ionicons>
                 </TouchableOpacity>
                 <Text style={{fontSize: 34, alignSelf: "center"}}>Messages</Text>
-                <TouchableOpacity onPress={ () => navigation.goBack()}>
-                    <Ionicons name="search" size={32} color="#939393" style={{margin: 3}}></Ionicons>
+                <TouchableOpacity style={{marginLeft: 10, backgroundColor: "#F5F5F5", borderRadius: 4}} onPress={ () => navigation.goBack()}>
+                    <Ionicons name="search" size={32} color="#939393"></Ionicons>
                 </TouchableOpacity>
-            </View>
+            {/* </View> */}
 
         </View>
     )
