@@ -4,7 +4,7 @@ import ChatHeader from '../screenComponents/ChatHeader'
 
 const ChatScreen = () => {
     return (
-        <SafeAreaView>
+        <SafeAreaView  style={{backgroundColor: "white", flex: 1}}>
             <ChatHeader title="Chat"></ChatHeader>
             <Text>I am the chat screen</Text>
 
