@@ -7,7 +7,7 @@ import VerifyEmailScreen from './screens/VerifyEmailScreen';
 import SearchScreen from './screens/SearchScreen';
 import LoginScreen from './screens/LoginScreen';
 import useAuth from './hooks/useAuth';
-import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
+import { Ionicons, Entypo, AntDesign, Feather, MaterialCommunityIcons} from "@expo/vector-icons"
 
 
 
