@@ -15,7 +15,6 @@ import {
   backgroundColor,
   color,
 } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
-import tw from "tailwind-rn";
 import {
   Ionicons,
   Entypo,
