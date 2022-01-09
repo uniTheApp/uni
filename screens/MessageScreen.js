@@ -5,6 +5,8 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import getMatchedUserInfo from '../lib/getMatchedUserInfo'
 import useAuth from '../hooks/useAuth'
 import tw from "tailwind-rn"
+import SenderMessage from '../screenComponents/SenderMessage'
+import ReceiverMessage from "../screenComponents/ReceiverMessage"
 
 
 const MessageScreen = () => {
@@ -19,7 +21,7 @@ const MessageScreen = () => {
     const { matchDetails } = params
 
     return (
-        <SafeAreaView style={tw('flex-1')}>
+        <SafeAreaView style={tw('flex-1 bg-white')}>
             <ChatHeader title={matchDetails.firstName}
             callEnabled
             ></ChatHeader>
