@@ -7,6 +7,8 @@ import useAuth from '../hooks/useAuth'
 import tw from "tailwind-rn"
 import SenderMessage from '../screenComponents/SenderMessage'
 import ReceiverMessage from "../screenComponents/ReceiverMessage"
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from "../firebase"
 
 
 const MessageScreen = () => {
@@ -16,9 +18,21 @@ const MessageScreen = () => {
     const {params} = useRoute()
     const [input, setInput] = useState("")
     const [messages, setMessages] = useState([])
-    const sendMessage = () => {};
 
     const { matchDetails } = params
+
+    const sendMessage = () => {
+    //     addDoc(collection(db, 'matches', matchDetails.id, 'messages'), {
+    //         timestamp: serverTimestamp(),
+    //         userId: user.uid,
+    //         displayName: user.displayName,
+    //         photoURL: matchDetails.users[user.uid].photoURL,
+    //         message: input
+    //     })
+
+    //     setInput('');
+    };
+
 
     return (
         <SafeAreaView style={tw('flex-1 bg-white')}>
