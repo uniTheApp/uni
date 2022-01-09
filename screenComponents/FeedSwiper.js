@@ -15,8 +15,8 @@ import tw from "tailwind-rn";
 import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState, useEffect } from 'react/cjs/react.development';
-import { collection, doc, onSnapshot } from 'firebase/firestore';
+import { useState, useEffect, useRef } from 'react/cjs/react.development';
+import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { db } from "../firebase"
 import Carousel from './Carousel';
 import useAuth from '../hooks/useAuth'
@@ -29,6 +29,7 @@ const FeedSwiper = ({data}) => {
     
     const [profiles, setProfiles] = useState([]);
     const {user} = useAuth();
+    const swipeRef = useRef(null)
 
     useEffect(() => {
         let unsub;
@@ -49,6 +50,21 @@ const FeedSwiper = ({data}) => {
         return unsub
     }, [])
 
+    // MATCHING
+
+    const noMatch = async (index) => {
+        if (!profiles[index]) return;
+
+        const userNotMatched = profiles[index]
+        console.log(`You did not match with ${userNotMatched.firstName}`)
+        
+        setDoc(doc(db, 'users', user.userId, 'passes', userNotMatched.id))
+    };
+
+    // END MATCHING
+
+ 
+
     console.log("profiles: ")
     console.log(profiles)
 
@@ -65,6 +81,7 @@ const FeedSwiper = ({data}) => {
             decelerationRate={"fast"}
             contentContainerStyle={{ paddingBottom: "45%" }} 
             renderItem={({item}) => item ? (
+                
                 <View>
                     {/* 2nd header */}
                     <View>
