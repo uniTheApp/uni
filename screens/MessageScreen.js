@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react'
 import { SafeAreaView, View, Text } from 'react-native'
 import ChatHeader from '../screenComponents/ChatHeader'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import getMatchedUserInfo from '../lib/getMatchedUserInfo'
+import useAuth from '../hooks/useAuth'
 
 
 const MessageScreen = () => {
 
     const navigation = useNavigation();
+    const user = useAuth()
+    const {params} = useRoute()
 
-    useEffect(() => {
-        navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" }},);
-        return () => {
-            navigation.getParent()?.setOptions({ tabBarStyle: undefined},);
-            
-        }
-    }, [navigation])
-
-
+    const { matchDetails } = params
+    console.log(matchDetails)
     return (
         <SafeAreaView>
-            <ChatHeader></ChatHeader>
+            <ChatHeader title={matchDetails.firstName}
+            callEnabled
+            ></ChatHeader>
             <Text>messages</Text>
         </SafeAreaView>
     )

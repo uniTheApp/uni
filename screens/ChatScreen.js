@@ -6,7 +6,7 @@ import ChatList from '../screenComponents/ChatList'
 const ChatScreen = () => {
     return (
         <SafeAreaView  style={{backgroundColor: "white", flex: 1}}>
-            <ChatHeader title="Chat"></ChatHeader>
+            <ChatHeader title="Messages"></ChatHeader>
             <ChatList />
 
         </SafeAreaView>

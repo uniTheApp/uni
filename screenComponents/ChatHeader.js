@@ -18,7 +18,7 @@ const ChatHeader = ({title, callEnabled}) => {
                 <TouchableOpacity style={{padding: 6, marginLeft: 10, borderRadius: 10}} onPress={ () => navigation.goBack()}>
                     <Ionicons name="chevron-back-outline" size={32} color="#939393"></Ionicons>
                 </TouchableOpacity>
-                <Text style={{fontSize: 30, alignSelf: "center"}}>Messages</Text>
+                <Text style={{fontSize: 30, alignSelf: "center"}}>{title}</Text>
                 <TouchableOpacity style={{ padding: 6, marginLeft: 10, borderRadius: 10}} onPress={ () => navigation.goBack()}>
                     <Ionicons name="search" size={32} color="#939393"></Ionicons>
                 </TouchableOpacity>

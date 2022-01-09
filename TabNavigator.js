@@ -24,25 +24,10 @@ const TabNavigator = () => {
   // deconst useAuth hook to get user obj
   const { user } = useAuth();
 
-  function ChatScreenStack() {
-    return (
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false
-        }}
-      >
-        <Stack.Screen name="Chat" component={ChatScreen} 
-        /> 
-        <Stack.Screen name="Message" component={MessageScreen} 
-          screenOptions={{
-            tabBarStyle: {display: "none"}
-          }}
-        /> 
-      </Stack.Navigator>
-    )
-  }
 
-  return (
+
+  function HomeTabs() {
+    return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
@@ -80,8 +65,8 @@ const TabNavigator = () => {
             }}
           ></Tab.Screen>
           <Tab.Screen
-            name="ChatTab"
-            component={ChatScreenStack}
+            name="Chat"
+            component={ChatScreen}
             options={{
               tabBarIcon: ({ focused }) => (
                 <MaterialCommunityIcons
@@ -93,7 +78,7 @@ const TabNavigator = () => {
               ),
               
             }}
-            t
+            
           >
 
 
@@ -116,6 +101,22 @@ const TabNavigator = () => {
         <Tab.Screen name="Login" component={LoginScreen}></Tab.Screen>
       )}
     </Tab.Navigator>
+    )}
+
+  return (
+    <Stack.Navigator
+    screenOptions={{
+      headerShown: false
+    }}
+  >
+    <Stack.Screen name="HomeTabs" component={HomeTabs} 
+    /> 
+    <Stack.Screen name="Message" component={MessageScreen} 
+      screenOptions={{
+        tabBarStyle: {display: "none"}
+      }}
+    /> 
+  </Stack.Navigator>
   );
 };
 
