@@ -7,6 +7,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import VerifyEmailScreen from "./screens/VerifyEmailScreen";
 import SearchScreen from "./screens/SearchScreen";
 import LoginScreen from "./screens/LoginScreen";
+import MessageScreen from "./screens/MessageScreen";
 import useAuth from "./hooks/useAuth";
 import {
   Ionicons,
@@ -30,7 +31,13 @@ const TabNavigator = () => {
           headerShown: false
         }}
       >
-        <Stack.Screen name="Chat" component={ChatScreen} /> 
+        <Stack.Screen name="Chat" component={ChatScreen} 
+        /> 
+        <Stack.Screen name="Message" component={MessageScreen} 
+          screenOptions={{
+            tabBarStyle: {display: "none"}
+          }}
+        /> 
       </Stack.Navigator>
     )
   }
@@ -82,8 +89,9 @@ const TabNavigator = () => {
                   size={30}
                   color={focused ? "#565656" : "#9C9C9C"}
                 />
-              ),
+              )
             }}
+            t
           >
 
 
