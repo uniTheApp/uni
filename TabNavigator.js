@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import HomeScreen from "./screens/HomeScreen";
 import ChatScreen from "./screens/ChatScreen";
@@ -16,10 +17,23 @@ import {
 } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const TabNavigator = () => {
   // deconst useAuth hook to get user obj
   const { user } = useAuth();
+
+  function ChatScreenStack() {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
+        <Stack.Screen name="Chat" component={ChatScreen} /> 
+      </Stack.Navigator>
+    )
+  }
 
   return (
     <Tab.Navigator
@@ -59,8 +73,8 @@ const TabNavigator = () => {
             }}
           ></Tab.Screen>
           <Tab.Screen
-            name="Chat"
-            component={ChatScreen}
+            name="ChatTab"
+            component={ChatScreenStack}
             options={{
               tabBarIcon: ({ focused }) => (
                 <MaterialCommunityIcons
@@ -70,7 +84,10 @@ const TabNavigator = () => {
                 />
               ),
             }}
-          ></Tab.Screen>
+          >
+
+
+          </Tab.Screen>
           <Tab.Screen
             name="Profile"
             component={ProfileScreen}
