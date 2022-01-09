@@ -88,8 +88,10 @@ const TabNavigator = () => {
                   name="message-text-outline"
                   size={30}
                   color={focused ? "#565656" : "#9C9C9C"}
+
                 />
-              )
+              ),
+              
             }}
             t
           >
