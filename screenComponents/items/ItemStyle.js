@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#D4D4D4",
     borderRadius: 10,
+    marginTop: 12,
+    marginLeft: screenWidth * 0.05,
+    marginRight: screenWidth * 0.05,
   },
 });
 

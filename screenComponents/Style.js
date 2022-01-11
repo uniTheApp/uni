@@ -59,23 +59,46 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#939393",
   },
-  pictureContainer: {
+  beneathContainer: {
     display: "flex",
-    flexGrow: 1,
+    flexDirection: "row",
+    position: "relative",
+    width: "100%",
+    // flexGrow: 1,
     marginTop: 10,
     marginBottom: 10,
+    alignItems: "flex-start",
+    flexWrap: "wrap",
+    //backgroundColor: "black",
+  },
+  abovePictureContainer: {
+    position: "absolute",
+    width: "100%",
+    marginTop: 10,
+    marginBottom: 10,
+    height: 204,
+
+    //backgroundColor: "red",
+  },
+  pictureContainer: {
+    // display: "flex",
+    // // flexGrow: 1,
+    // // marginTop: 10,
+    // // marginBottom: 10,
+    // alignItems: "flex-start",
+    // flexWrap: "wrap",
     // justifyContent: "space-evenly",
     // flexWrap: "wrap",
     // alignContent: "center",
-    alignItems: "center",
+    // alignItems: "center",
     //backgroundColor: "black",
   },
   pictures: {
     width: 90,
     height: 90,
     marginTop: 12,
-    marginLeft: "5%",
-    marginRight: "5%",
+    marginLeft: screenWidth * 0.05,
+    marginRight: screenWidth * 0.05,
     borderRadius: 10,
     //backgroundColor: "red",
   },
@@ -102,6 +125,10 @@ const styles = StyleSheet.create({
     // marginTop: 10,
   },
   editIcon: {},
+
+  //
+
+  //
   //HOME
   headerText: {
     textAlign: "center",

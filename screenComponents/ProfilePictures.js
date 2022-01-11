@@ -15,7 +15,10 @@ import {
   backgroundColor,
   color,
 } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
-import tw from "tailwind-rn";
+import { useState, useEffect } from "react/cjs/react.development";
+import useAuth from "../hooks/useAuth";
+import { collection, doc, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase";
 import {
   Ionicons,
   Entypo,
@@ -28,8 +31,44 @@ import SmallFillInBox from "./boxes/SmallFillInBox";
 import MediumFillInBox from "./boxes/MediumFillInBox";
 import LargeFillInBox from "./boxes/LargeFillInBox";
 import PictureEdit from "./items/PictureEdit";
+import Position from "react-native/Libraries/Components/Touchable/Position";
 
-const profilePictures = ({ Data }) => {
+const Item = ({ image }) => (
+  <View style={styles.pictureContainer}>
+    <Image style={styles.pictures} source={{ uri: image.photoURL }} />
+  </View>
+);
+
+const profilePictures = () => {
+  //RETRIEVING PHOTOS
+  const [profiles, setProfiles] = useState([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    let unsub;
+
+    const fetchCards = async () => {
+      unsub = onSnapshot(collection(db, "users"), (snapshot) => {
+        setProfiles(
+          snapshot.docs
+            .filter((doc) => doc.id !== user.uid)
+            .map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }))
+        );
+      });
+    };
+
+    fetchCards();
+    return unsub;
+  }, []);
+
+  const renderItem = ({ item }) => {
+    console.log(item);
+    return <Item image={item} />;
+  };
+
   return (
     <SafeAreaView>
       {/* <View> */}
@@ -38,24 +77,32 @@ const profilePictures = ({ Data }) => {
       {/* </View> */}
 
       {/* all pictures */}
-      <View>
+
+      <View style={styles.abovePictureContainer}>
         <FlatList
-          data={Data}
+          data={profiles}
           scrollEnabled="false"
-          keyExtractor={(item, index) => item.key}
           //style={{ position: "absolute", bottom: 80 }}
           //carolyn note: not too sure why but you need key in order to change columns
           //may want to change this lol and just use wrapping
           numColumns={3}
           key={3}
-          renderItem={({ item, index }) => (
-            <View style={styles.pictureContainer}>
-              <Image style={styles.pictures} source={{ uri: item.photoURL }} />
-            </View>
-          )}
+          keyExtractor={(item, index) => item.key}
+          renderItem={renderItem}
         />
-        {/* <PictureEdit></PictureEdit> */}
       </View>
+
+      <View style={styles.beneathContainer}>
+        <PictureEdit></PictureEdit>
+        <PictureEdit></PictureEdit>
+        <PictureEdit></PictureEdit>
+        <PictureEdit></PictureEdit>
+        <PictureEdit></PictureEdit>
+        <PictureEdit></PictureEdit>
+      </View>
+
+      {/* <PictureEdit></PictureEdit> */}
+
       <View style={{ flexGrow: 1 }}>
         {/* CAROLYN NOTE: this percentage is kinda messed up ngl, need to do some calculations */}
         <ScrollView style={{ height: "63%" }}>
