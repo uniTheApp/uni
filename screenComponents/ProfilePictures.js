@@ -28,6 +28,7 @@ import SmallFillInBox from "./boxes/SmallFillInBox";
 import MediumFillInBox from "./boxes/MediumFillInBox";
 import LargeFillInBox from "./boxes/LargeFillInBox";
 import PictureEdit from "./items/PictureEdit";
+import ImageUpload from "./ImageUpload";
 
 const profilePictures = ({ Data }) => {
   return (
@@ -56,6 +57,13 @@ const profilePictures = ({ Data }) => {
         />
         {/* <PictureEdit></PictureEdit> */}
       </View>
+
+      <View style={styles.beneathContainer}>
+        <ImageUpload></ImageUpload>
+
+
+      </View>
+
       <View style={{ flexGrow: 1 }}>
         {/* CAROLYN NOTE: this percentage is kinda messed up ngl, need to do some calculations */}
         <ScrollView style={{ height: "63%" }}>

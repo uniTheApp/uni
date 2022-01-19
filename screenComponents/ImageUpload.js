@@ -10,6 +10,7 @@ import {
   Image
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
+import { Ionicons } from "@expo/vector-icons";
 // import storage from '@react-native-firebase/storage';
 // import * as Progress from 'react-native-progress';
 import useAuth from '../hooks/useAuth';
@@ -66,52 +67,52 @@ const ImageUpload = () => {
     }
 
       return (
-          <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
-            <Text style={styles.buttonText}>Pick an image</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.editBoxContainer} onPress={selectImage}>
+          <Ionicons name="ios-add" size={24} color="#D4D4D4" />
+        </TouchableOpacity>
       )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      backgroundColor: '#bbded6'
-    },
-    selectButton: {
-      borderRadius: 5,
-      width: 150,
-      height: 50,
-      backgroundColor: '#8ac6d1',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    uploadButton: {
-      borderRadius: 5,
-      width: 150,
-      height: 50,
-      backgroundColor: '#ffb6b9',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: 20
-    },
-    buttonText: {
-      color: 'white',
-      fontSize: 18,
-      fontWeight: 'bold'
-    },
-    imageContainer: {
-      marginTop: 30,
-      marginBottom: 50,
-      alignItems: 'center'
-    },
-    progressBarContainer: {
-      marginTop: 20
-    },
-    imageBox: {
-      width: 300,
-      height: 300
-    }
-  });
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#bbded6",
+  },
+  selectButton: {
+    borderRadius: 5,
+    width: 150,
+    height: 50,
+    backgroundColor: "#8ac6d1",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  uploadButton: {
+    borderRadius: 5,
+    width: 150,
+    height: 50,
+    backgroundColor: "#ffb6b9",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  imageContainer: {
+    marginTop: 30,
+    marginBottom: 50,
+    alignItems: "center",
+  },
+  progressBarContainer: {
+    marginTop: 20,
+  },
+  imageBox: {
+    width: 300,
+    height: 300,
+  },
+});
 
   export default ImageUpload;

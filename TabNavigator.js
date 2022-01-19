@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import HomeScreen from "./screens/HomeScreen";
 import ChatScreen from "./screens/ChatScreen";
-import ProfileScreen from "./screens/CreateUserScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import VerifyEmailScreen from "./screens/VerifyEmailScreen";
 import SearchScreen from "./screens/SearchScreen";
 import LoginScreen from "./screens/LoginScreen";
