@@ -97,7 +97,7 @@ const FeedSwiper = ({data}) => {
                 
                     {/* Image  */}
                     {/* <Image style={{width: '100%', height: Dimensions.get('window').height - 244, marginBottom: 10}} source={{uri: item.photoURL}}></Image> */}
-                    <Carousel data={profiles}></Carousel>
+                    <Carousel data={item.photos}></Carousel>
                     {/* end image */}
 
 
