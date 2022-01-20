@@ -2,13 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View, Text, TextInput, Button, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, Keyboard, FlatList } from 'react-native'
 import ChatHeader from '../screenComponents/ChatHeader'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import getMatchedUserInfo from '../lib/getMatchedUserInfo'
 import useAuth from '../hooks/useAuth'
 import tw from "tailwind-rn"
 import SenderMessage from '../screenComponents/SenderMessage'
 import ReceiverMessage from "../screenComponents/ReceiverMessage"
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import { db } from "../firebase"
 
 
 const MessageScreen = () => {

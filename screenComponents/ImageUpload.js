@@ -1,10 +1,3 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useMemo,
-} from "react";
 import {
   View,
   SafeAreaView,
@@ -16,18 +9,12 @@ import {
   Image
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
-import { Ionicons } from "@expo/vector-icons";
-// import storage from '@react-native-firebase/storage';
-// import * as Progress from 'react-native-progress';
 import useAuth from '../hooks/useAuth';
 import {doc, setDoc, updateDoc, arrayUnion} from "@firebase/firestore"
 import { auth, db } from "../firebase"
 import {getStorage, ref, uploadBytes, getDownloadURL} from "@firebase/storage"
 
-const ImageUpload = () => {
-  const [image, setImage] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [transferred, setTransferred] = useState(0);
+const ImageUpload = (props, {style}) => {
 
   const { user } = useAuth();
   const storage = getStorage();
@@ -45,12 +32,12 @@ const ImageUpload = () => {
           if (!result.cancelled) {
             setImage(result.uri);
             imageName = `images/${auth.currentUser.uid}/` + new Date().getTime()
-            await ImageUpload(result.uri, imageName)
+            await uploadImage(result.uri, imageName)
             addUrl(imageName)
           }
     };
 
-    const ImageUpload = async (uri, imageName) => {
+    const uploadImage = async (uri, imageName) => {
         const response = await fetch(uri)
         const blob = await response.blob()
 
@@ -72,19 +59,9 @@ const ImageUpload = () => {
       }
     };
 
-  const ImageUpload = async (uri, imageName) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    var reference = ref(storage, imageName);
-    console.log(reference);
-    return uploadBytes(reference, blob);
-    // updateDoc(doc(db, "users", auth.currentUser.uid), {image: blob})
-  };
-
   return (
-    <TouchableOpacity style={styles.selectButton} onPress={selectImage}>
-      <Text style={styles.buttonText}>Pick an image</Text>
+    <TouchableOpacity style={style} onPress={selectImage}>
+      {props.children}
     </TouchableOpacity>
   );
 };
