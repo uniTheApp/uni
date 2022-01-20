@@ -6,7 +6,7 @@ const { width } = Dimensions.get('window')
 
 
 const Carousel = ({ data }) => {
-    // get the 
+    // get the scroll of x and position init
     const scrollX = new Animated.Value(0)
     let position = Animated.divide(scrollX, width)
     const [dataList, setDataList] = useState(data)
