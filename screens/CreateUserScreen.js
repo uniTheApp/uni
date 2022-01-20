@@ -20,10 +20,6 @@ const CreateUserScreen = () => {
   const [loadingInitial, setLoadingInitial] = useState(true)
   const [loading, setLoading] = useState(false);
 
-  // const [image, setImage] = useState(null);
-  // const [uploading, setUploading] = useState(false);
-  // const [transferred, setTransferred] = useState(0);
-
 
   const navigation = useNavigation()
 
