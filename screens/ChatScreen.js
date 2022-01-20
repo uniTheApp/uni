@@ -7,6 +7,8 @@ const ChatScreen = () => {
     return (
         <SafeAreaView  style={{backgroundColor: "white", flex: 1}}>
             <ChatHeader title="Messages"></ChatHeader>
+            
+            {/* Chat list renders list of users to message with, look in screen components*/}
             <ChatList />
 
         </SafeAreaView>

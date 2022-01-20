@@ -1,21 +1,14 @@
 import { useNavigation } from '@react-navigation/native'
-import {React, useEffect, useLayoutEffect, useState} from 'react'
+import {React, useLayoutEffect} from 'react'
 import {
-  View,
-  Text,
-  Button,
   SafeAreaView,
   StyleSheet,
-  Image,
-  FlatList,
-  Dimensions,
-  TouchableOpacity,
 } from "react-native";
 import tw from "tailwind-rn";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import { collection, doc, onSnapshot } from 'firebase/firestore';
-import { auth, db } from '../firebase'
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase'
 import useAuth from '../hooks/useAuth'
 import FeedSwiper from "../screenComponents/FeedSwiper";
 import TopBar from "../screenComponents/TopBar";
@@ -48,7 +41,7 @@ const HomeScreen = () => {
             <TopBar></TopBar>
     
             {/* cards */}
-            <FeedSwiper data={DUMMY_DATA}></FeedSwiper>
+            <FeedSwiper></FeedSwiper>
             {/* end cards */}
     
             

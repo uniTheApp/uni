@@ -1,11 +1,14 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendEmailVerification } from "@firebase/auth"
 import {doc, setDoc} from "@firebase/firestore"
 import { auth, db } from "../firebase"
-import first from 'ee-first'
 import ImageUpload from '../screenComponents/ImageUpload'
+
+/*
+Temporary screen to update user data while profile page is under development
+*/
+
 
 const CreateUserScreen = () => {
   const [email, setEmail] = useState('')
@@ -17,16 +20,20 @@ const CreateUserScreen = () => {
   const [major, setMajor] = useState('')
 
   const [image, setImage] = useState(null)
-  const [loadingInitial, setLoadingInitial] = useState(true)
-  const [loading, setLoading] = useState(false);
 
 
   const navigation = useNavigation()
-
+  
+  /*
+  Load user creates a new document for user with information in form
+  It deletes existing information each time it is called
+  This is why it is temporary  
+  */
+  
   const loadUser = () => {
     auth.onAuthStateChanged(async function(user)  {
       if(user){
-          updateDoc(doc(db, "users", auth.currentUser.uid), {
+          setDoc(doc(db, "users", auth.currentUser.uid), {
               age: age, //current date rn
               email: auth.currentUser.email,
               firstName: firstName,
