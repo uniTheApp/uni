@@ -1,19 +1,15 @@
 import React from 'react';
 import {
-  Alert,
   TouchableOpacity,
   Text,
   Dimensions,
   StyleSheet,
   FlatList,
-  Image,
   View,
   SafeAreaView,
 } from 'react-native';
-import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import tw from "tailwind-rn";
-import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import { Entypo, AntDesign, Feather } from "@expo/vector-icons"
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState, useEffect, useRef } from 'react/cjs/react.development';
 import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
@@ -23,18 +19,14 @@ import useAuth from '../hooks/useAuth'
 
 
 
-const FeedSwiper = ({data}) => {
-    
-    // console.log(data)
-    
+const FeedSwiper = () => {
+
+    // set default vals for the profiles and swipes, get the authed user
     const [profiles, setProfiles] = useState([]);
     const {user} = useAuth();
     const swipeRef = useRef(null)
 
-    
-
-
-
+    // Get the cards from the db, store the objs in the profiles array
     useEffect(() => {
         let unsub;
 
@@ -48,13 +40,11 @@ const FeedSwiper = ({data}) => {
                 )
             })
         }
-
-
         fetchCards();
         return unsub
     }, [])
 
-
+    // MATCHING HELPER FUNCTIONS
     const like = (postIndex) => {
         if (!profiles[index]) return;
 
@@ -65,9 +55,6 @@ const FeedSwiper = ({data}) => {
         setDoc(doc(db, 'users', user.uid, 'like', userSwiped.id))
     }
 
-    // const like = async
-    // MATCHING
-
     const noMatch = async (index) => {
         if (!profiles[index]) return;
 
@@ -76,18 +63,12 @@ const FeedSwiper = ({data}) => {
         
         setDoc(doc(db, 'users', user.userId, 'passes', userNotMatched.id))
     };
-
-    // END MATCHING
-
- 
-
-    console.log("profiles: ")
-    console.log(profiles)
+    // END MATCHING HELPER FUNCTIONS 
 
      return (
      
     <SafeAreaView>
-
+        {/* main flatist of profiles */}
         <FlatList
             data={profiles}
             index={0}
@@ -95,6 +76,10 @@ const FeedSwiper = ({data}) => {
             snapToInterval={Dimensions.get('window').height - 163}
             snapToAlignment="start"
             decelerationRate={"fast"}
+            onScroll={() => {
+                // noMatch(index)
+                // console.log(index)
+            }}
             contentContainerStyle={{ paddingBottom: "45%" }}
             renderItem={({item, index}) => item ? (
                 <View>
@@ -110,10 +95,9 @@ const FeedSwiper = ({data}) => {
                     </View>
                     {/* end 2nd header */}
                 
-                    {/* Image  */}
-                    {/* <Image style={{width: '100%', height: Dimensions.get('window').height - 244, marginBottom: 10}} source={{uri: item.photoURL}}></Image> */}
+                    {/* Images */}
                     <Carousel data={item.photos}></Carousel>
-                    {/* end image */}
+                    {/* end images */}
 
 
                     {/* Bottom more info */}
@@ -158,7 +142,7 @@ const FeedSwiper = ({data}) => {
 )}
 
 
-
+// local style sheet
 
 const styles = StyleSheet.create({
     headerText: {
@@ -177,16 +161,11 @@ const styles = StyleSheet.create({
         marginTop: -59,
         height: "90%",
         marginLeft: -20,
-
-        // backgroundColor: "blue",
         width: '112%',
         backgroundColor: "white"
 
     },
     imgCardText : {
-        // alignSelf: "stretch",
-
-        // flex: 1,
         fontFamily: "Chivo-Regular",
         fontSize: 24,
         marginTop: 12,
@@ -194,9 +173,6 @@ const styles = StyleSheet.create({
 
     },
     imgCardTextAlt : {
-        // alignSelf: "stretch",
-
-        // flex: 1,
         fontFamily: "Chivo-Regular",
         fontSize: 18,
         color: "#939393",
@@ -205,11 +181,6 @@ const styles = StyleSheet.create({
 
     },
     cardButton: {
-        // marginTop: -20,
-        // marginLeft: -20,
-        // backgroundColor: "transparent"
-        // marginRight: -20
-
         margin: 10,
     },
 
