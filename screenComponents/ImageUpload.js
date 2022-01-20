@@ -13,15 +13,16 @@ import {
   StyleSheet,
   Platform,
   Alert,
-  Image,
-} from "react-native";
-import * as ImagePicker from "expo-image-picker";
+  Image
+} from 'react-native';
+import * as ImagePicker from 'expo-image-picker'
+import { Ionicons } from "@expo/vector-icons";
 // import storage from '@react-native-firebase/storage';
 // import * as Progress from 'react-native-progress';
-import useAuth from "../hooks/useAuth";
-import { doc, setDoc, updateDoc } from "@firebase/firestore";
-import { auth, db } from "../firebase";
-import { getStorage, ref, uploadBytes, now } from "@firebase/storage";
+import useAuth from '../hooks/useAuth';
+import {doc, setDoc, updateDoc, arrayUnion} from "@firebase/firestore"
+import { auth, db } from "../firebase"
+import {getStorage, ref, uploadBytes, getDownloadURL} from "@firebase/storage"
 
 const ImageUpload = () => {
   const [image, setImage] = useState(null);
@@ -31,24 +32,45 @@ const ImageUpload = () => {
   const { user } = useAuth();
   const storage = getStorage();
 
-  const selectImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [9, 16],
-      quality: 1,
-    });
+    const selectImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [9, 16],
+            quality: 1,
+          });
+      
+          console.log(result);
+      
+          if (!result.cancelled) {
+            setImage(result.uri);
+            imageName = `images/${auth.currentUser.uid}/` + new Date().getTime()
+            await ImageUpload(result.uri, imageName)
+            addUrl(imageName)
+          }
+    };
 
-    console.log(result);
+    const ImageUpload = async (uri, imageName) => {
+        const response = await fetch(uri)
+        const blob = await response.blob()
 
-    if (!result.cancelled) {
-      setImage(result.uri);
-      ImageUpload(
-        result.uri,
-        `images/${auth.currentUser.uid}/` + new Date().toString()
-      );
+        //image upload
+        var reference = ref(storage, imageName);
+        console.log(reference)
+        console.log("image: " + imageName)
+        return uploadBytes(reference, blob)
     }
-  };
+
+    const addUrl = async (imageName) => {
+      photoURL = await getDownloadURL(ref(storage, imageName))
+      console.log("photo URL: " + photoURL)
+      //add image to firestore
+      if(user){
+        updateDoc(doc(db, "users", auth.currentUser.uid), {
+          photos: arrayUnion(photoURL)
+        });
+      }
+    };
 
   const ImageUpload = async (uri, imageName) => {
     const response = await fetch(uri);

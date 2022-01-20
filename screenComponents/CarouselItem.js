@@ -8,7 +8,7 @@ const CarouselItem = ({ item }) => {
     console.log(item)
     return (
         <View style={styles.cardView}>
-            <Image style={styles.image} source={{ uri: item.photoURL }} />
+            <Image style={styles.image} source={{ uri: item }} />
         </View>
         
     )

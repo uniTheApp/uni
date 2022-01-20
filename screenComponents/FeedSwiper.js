@@ -15,8 +15,8 @@ import tw from "tailwind-rn";
 import { Ionicons, Entypo, AntDesign, Feather } from "@expo/vector-icons"
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState, useEffect } from 'react/cjs/react.development';
-import { collection, doc, onSnapshot } from 'firebase/firestore';
+import { useState, useEffect, useRef } from 'react/cjs/react.development';
+import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { db } from "../firebase"
 import Carousel from './Carousel';
 import useAuth from '../hooks/useAuth'
@@ -29,6 +29,7 @@ const FeedSwiper = ({data}) => {
     
     const [profiles, setProfiles] = useState([]);
     const {user} = useAuth();
+    const swipeRef = useRef(null)
 
     
 
@@ -65,6 +66,20 @@ const FeedSwiper = ({data}) => {
     }
 
     // const like = async
+    // MATCHING
+
+    const noMatch = async (index) => {
+        if (!profiles[index]) return;
+
+        const userNotMatched = profiles[index]
+        console.log(`You did not match with ${userNotMatched.firstName}`)
+        
+        setDoc(doc(db, 'users', user.userId, 'passes', userNotMatched.id))
+    };
+
+    // END MATCHING
+
+ 
 
     console.log("profiles: ")
     console.log(profiles)
@@ -97,7 +112,7 @@ const FeedSwiper = ({data}) => {
                 
                     {/* Image  */}
                     {/* <Image style={{width: '100%', height: Dimensions.get('window').height - 244, marginBottom: 10}} source={{uri: item.photoURL}}></Image> */}
-                    <Carousel data={profiles}></Carousel>
+                    <Carousel data={item.photos}></Carousel>
                     {/* end image */}
 
 
