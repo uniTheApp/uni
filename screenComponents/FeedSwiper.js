@@ -30,6 +30,10 @@ const FeedSwiper = ({data}) => {
     const [profiles, setProfiles] = useState([]);
     const {user} = useAuth();
 
+    
+
+
+
     useEffect(() => {
         let unsub;
 
@@ -49,6 +53,19 @@ const FeedSwiper = ({data}) => {
         return unsub
     }, [])
 
+
+    const like = (postIndex) => {
+        if (!profiles[index]) return;
+
+        const userSwiped = profiles[postIndex]
+        console.log(`you like ${userSwiped.firstName}`)
+
+
+        setDoc(doc(db, 'users', user.uid, 'like', userSwiped.id))
+    }
+
+    // const like = async
+
     console.log("profiles: ")
     console.log(profiles)
 
@@ -63,14 +80,14 @@ const FeedSwiper = ({data}) => {
             snapToInterval={Dimensions.get('window').height - 163}
             snapToAlignment="start"
             decelerationRate={"fast"}
-            contentContainerStyle={{ paddingBottom: "45%" }} 
-            renderItem={({item}) => item ? (
+            contentContainerStyle={{ paddingBottom: "45%" }}
+            renderItem={({item, index}) => item ? (
                 <View>
                     {/* 2nd header */}
                     <View>
                         <View>
                             <Text style={styles.imgCardText}>{item.firstName} - {item.college} '{item.gradYear}</Text>
-                            <Text style={styles.imgCardTextAlt}>{item.age} years old | {item.major}</Text>
+                            <Text style={styles.imgCardTextAlt}>{item.age} years old</Text>
                         </View>
                         <TouchableOpacity style={tw("absolute right-4 top-4")}>
                             <Entypo name="dots-three-vertical" size={20} color="black" />
@@ -119,6 +136,7 @@ const FeedSwiper = ({data}) => {
 
 
             )}
+            
         />
 
     </SafeAreaView>

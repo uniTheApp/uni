@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import HomeScreen from "./screens/HomeScreen";
 import ChatScreen from "./screens/ChatScreen";
@@ -6,6 +7,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import VerifyEmailScreen from "./screens/VerifyEmailScreen";
 import SearchScreen from "./screens/SearchScreen";
 import LoginScreen from "./screens/LoginScreen";
+import MessageScreen from "./screens/MessageScreen";
 import useAuth from "./hooks/useAuth";
 import {
   Ionicons,
@@ -16,12 +18,16 @@ import {
 } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const TabNavigator = () => {
   // deconst useAuth hook to get user obj
   const { user } = useAuth();
 
-  return (
+
+
+  function HomeTabs() {
+    return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
@@ -67,10 +73,16 @@ const TabNavigator = () => {
                   name="message-text-outline"
                   size={30}
                   color={focused ? "#565656" : "#9C9C9C"}
+
                 />
               ),
+              
             }}
-          ></Tab.Screen>
+            
+          >
+
+
+          </Tab.Screen>
           <Tab.Screen
             name="Profile"
             component={ProfileScreen}
@@ -89,6 +101,22 @@ const TabNavigator = () => {
         <Tab.Screen name="Login" component={LoginScreen}></Tab.Screen>
       )}
     </Tab.Navigator>
+    )}
+
+  return (
+    <Stack.Navigator
+    screenOptions={{
+      headerShown: false
+    }}
+  >
+    <Stack.Screen name="HomeTabs" component={HomeTabs} 
+    /> 
+    <Stack.Screen name="Message" component={MessageScreen} 
+      screenOptions={{
+        tabBarStyle: {display: "none"}
+      }}
+    /> 
+  </Stack.Navigator>
   );
 };
 
