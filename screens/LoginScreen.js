@@ -1,25 +1,20 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendEmailVerification } from "@firebase/auth"
 import { auth } from "../firebase"
 import useAuth from "../hooks/useAuth"
 
-/*
-Note: convert to using useAuth so it can clean stuff up
-*/
-
-
 const LoginScreen = () => {
-  // console.log("login screen")
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState('')
-  const [loadingInitial, setLoadingInitial] = useState(true)
-  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation()
   const {handleLogin, handleSignUp} = useAuth()
+
+  /* Waiting for user auth state changed, if email verified user, go home
+  else if only user go to verify email
+  otherwise no user */
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -37,6 +32,7 @@ const LoginScreen = () => {
     return unsubscribe
   }, [])
 
+  /* Style revamp needed, basic login screen */
 
   return (
     <KeyboardAvoidingView
