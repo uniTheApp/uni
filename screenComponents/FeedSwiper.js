@@ -87,7 +87,7 @@ const FeedSwiper = ({data}) => {
                     <View>
                         <View>
                             <Text style={styles.imgCardText}>{item.firstName} - {item.college} '{item.gradYear}</Text>
-                            <Text style={styles.imgCardTextAlt}>{item.age} years old | {item.major} this is index: {index} {item.id}</Text>
+                            <Text style={styles.imgCardTextAlt}>{item.age} years old</Text>
                         </View>
                         <TouchableOpacity style={tw("absolute right-4 top-4")}>
                             <Entypo name="dots-three-vertical" size={20} color="black" />
