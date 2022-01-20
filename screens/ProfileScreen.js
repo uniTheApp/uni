@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-
 import React from "react";
 import { SafeAreaView } from "react-native";
 import useAuth from "../hooks/useAuth";

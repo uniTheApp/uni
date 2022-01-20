@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, TextInput } from "react-native";
-import { logToConsole } from "react-native/Libraries/Utilities/RCTLog";
 import { styles } from "../Style";
 
 const MediumFillInBox = ({ textQuestion, textAnswer, textValue, textFunction }) => {

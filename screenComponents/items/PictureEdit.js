@@ -1,9 +1,6 @@
 import React, {
-  createContext,
-  useContext,
   useState,
-  useEffect,
-  useMemo,
+
 } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./ItemStyle";
@@ -18,7 +15,6 @@ const PictureEdit = () => {
 
   const [image, setImage] = useState(null);
 
-  // const { user } = useAuth();
   const storage = getStorage();
 
   const selectImage = async () => {

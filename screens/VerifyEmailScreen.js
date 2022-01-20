@@ -10,6 +10,8 @@ const VerifyEmailScreen = () => {
     const navigation = useNavigation();
     const {handleSignOut} = useAuth()
 
+    /*Waits for email verification, refreshing on specified interval*/
+
     checkForVerifiedInterval = setInterval(() => {
         if(auth.currentUser == null){
           clearInterval(checkForVerifiedInterval)
@@ -20,7 +22,7 @@ const VerifyEmailScreen = () => {
           .then(ok => {
             if (auth.currentUser.emailVerified) {
               console.log("email verified")
-              navigation.replace("CreateUser")//instead go to create profile?
+              navigation.replace("CreateUser")//instead go to create profile after page is finished
               clearInterval(checkForVerifiedInterval)
               return
             }
@@ -30,6 +32,7 @@ const VerifyEmailScreen = () => {
           })
     }, 1000)
 
+    //There is no styling rn whoops
     return (
         <View>
             <Text>I am the verification screen</Text>
