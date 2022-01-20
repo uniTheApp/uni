@@ -1,11 +1,10 @@
 import React from 'react'
-import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, Image, Dimensions } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
 
 
 const CarouselItem = ({ item }) => {
-    console.log(item)
     return (
         <View style={styles.cardView}>
             <Image style={styles.image} source={{ uri: item }} />

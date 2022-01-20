@@ -2,15 +2,16 @@ import React from 'react'
 import {View , Text, FlatList} from 'react-native'
 import tw from 'tailwind-rn'
 import { useState, useEffect } from 'react/cjs/react.development';
-import { collection, doc, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import {db} from "../firebase"
 import ChatRow from './ChatRow';
 import useAuth from '../hooks/useAuth';
 
 const ChatList = () => {
+    // get the init list of matches 
     const [matches, setMatches] = useState([])
     const {user} = useAuth();
-
+    // retrieve data from db
     useEffect(() => {
         onSnapshot(collection(db, "users"), snapshot => {
             setMatches(
