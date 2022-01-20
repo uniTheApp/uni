@@ -1,38 +1,22 @@
 import React from "react";
 import {
-  Alert,
-  TouchableOpacity,
   Text,
-  Dimensions,
-  StyleSheet,
   FlatList,
   Image,
   View,
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import {
-  backgroundColor,
-  color,
-} from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import { useState, useEffect } from "react/cjs/react.development";
 import useAuth from "../hooks/useAuth";
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
-import {
-  Ionicons,
-  Entypo,
-  AntDesign,
-  Feather,
-  MaterialIcons,
-} from "@expo/vector-icons";
 import { styles } from "./Style";
-import SmallFillInBox from "./boxes/SmallFillInBox";
 import MediumFillInBox from "./boxes/MediumFillInBox";
 import LargeFillInBox from "./boxes/LargeFillInBox";
 import PictureEdit from "./items/PictureEdit";
-import Position from "react-native/Libraries/Components/Touchable/Position";
 
+//profile pictures
 const Item = ({ image }) => (
   <View style={styles.pictureContainer}>
     <Image style={styles.pictures} source={{ uri: image.photoURL }} />
@@ -71,20 +55,11 @@ const profilePictures = () => {
 
   return (
     <SafeAreaView>
-      {/* <View> */}
-      {/* <Text style={[styles.topText]}>Yale University</Text> */}
-      {/* <Text style={[styles.collegeText]}>Yale University</Text> */}
-      {/* </View> */}
-
-      {/* all pictures */}
-
+      {/* list of pictures from firebase */}
       <View style={styles.abovePictureContainer}>
         <FlatList
           data={profiles}
           scrollEnabled="false"
-          //style={{ position: "absolute", bottom: 80 }}
-          //carolyn note: not too sure why but you need key in order to change columns
-          //may want to change this lol and just use wrapping
           numColumns={3}
           key={3}
           keyExtractor={(item, index) => item.key}
@@ -92,6 +67,7 @@ const profilePictures = () => {
         />
       </View>
 
+      {/* overlaying buttons to edit profile pictures */}
       <View style={styles.beneathContainer}>
         <PictureEdit></PictureEdit>
         <PictureEdit></PictureEdit>
@@ -101,16 +77,13 @@ const profilePictures = () => {
         <PictureEdit></PictureEdit>
       </View>
 
-      {/* <PictureEdit></PictureEdit> */}
-
       <View style={{ flexGrow: 1 }}>
-        {/* CAROLYN NOTE: this percentage is kinda messed up ngl, need to do some calculations */}
+        {/* percentages need to change and data needs to be dynamic */}
         <ScrollView style={{ height: "63%" }}>
           {/* Basic Module */}
           <View>
             <View style={styles.moduleHeaderContainer}>
               <Text style={styles.moduleHeaderText}>Basics</Text>
-              {/* <MaterialIcons name="edit" size={25} color="#939393" /> */}
             </View>
             <View style={styles.rectContainer}>
               <MediumFillInBox
@@ -148,6 +121,7 @@ const profilePictures = () => {
             </View>
           </View>
 
+          {/* Question Module */}
           <View>
             <Text style={[styles.moduleHeaderText, { marginTop: 10 }]}>
               Questions + Preferences
