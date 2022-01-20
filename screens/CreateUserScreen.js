@@ -30,7 +30,7 @@ const CreateUserScreen = () => {
   const loadUser = () => {
     auth.onAuthStateChanged(async function(user)  {
       if(user){
-          setDoc(doc(db, "users", auth.currentUser.uid), {
+          updateDoc(doc(db, "users", auth.currentUser.uid), {
               age: age, //current date rn
               email: auth.currentUser.email,
               firstName: firstName,
