@@ -1,21 +1,25 @@
 import React from "react";
 import { View, Text, TextInput } from "react-native";
-import { styles } from "../Style";
+import { styles } from "./boxStyle";
 
-const MediumFillInBox = ({ textQuestion, textAnswer, textValue, textFunction }) => {
+const MediumFillInBox = ({
+  textQuestion,
+  textAnswer,
+  textValue,
+  textFunction,
+}) => {
   return (
     <View style={[styles.boxFillIn, { width: "100%" }]}>
       <View style={styles.textInTheBox}>
         <Text style={[styles.boxFillInText, { color: "#939393" }]}>
-            {textQuestion}
+          {textQuestion}
         </Text>
-        <TextInput 
+        <TextInput
           placeholder={textAnswer}
           style={[styles.boxFillInText, { color: "#000000" }]}
           textValue={textValue}
           onChangeText={textFunction}
-          >
-        </TextInput>
+        ></TextInput>
       </View>
     </View>
   );
