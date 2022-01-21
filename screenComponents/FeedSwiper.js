@@ -88,10 +88,6 @@ const FeedSwiper = () => {
             snapToInterval={Dimensions.get('window').height - 163}
             snapToAlignment="start"
             decelerationRate={"fast"}
-            onScroll={() => {
-                // noMatch(index)
-                // console.log(index)
-            }}
             onViewableItemsChanged={onViewableItemsChangedHandler}
             contentContainerStyle={{ paddingBottom: "45%" }}
             renderItem={({item, index}) => item ? (
