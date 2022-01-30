@@ -11,7 +11,7 @@ import {
 import tw from "tailwind-rn";
 import { Entypo, AntDesign, Feather } from "@expo/vector-icons"
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState, useEffect, useRef } from 'react/cjs/react.development';
+import { useState, useEffect, useRef, useCallback } from 'react/cjs/react.development';
 import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { db } from "../firebase"
 import Carousel from './Carousel';
@@ -63,6 +63,18 @@ const FeedSwiper = () => {
         
         setDoc(doc(db, 'users', user.userId, 'passes', userNotMatched.id))
     };
+
+    // set the users that have been rendered in the feed in db
+    const onViewableItemsChangedHandler = useCallback(
+        ({viewableItems}) => {
+
+            if (viewableItems && viewableItems.length !== 0) {
+                setDoc(doc(db, 'users', user.uid, 'rendered', viewableItems[0].item.id), viewableItems[0].item)
+
+                }
+        },
+        [],
+    )
     // END MATCHING HELPER FUNCTIONS 
 
      return (
@@ -76,10 +88,7 @@ const FeedSwiper = () => {
             snapToInterval={Dimensions.get('window').height - 163}
             snapToAlignment="start"
             decelerationRate={"fast"}
-            onScroll={() => {
-                // noMatch(index)
-                // console.log(index)
-            }}
+            onViewableItemsChanged={onViewableItemsChangedHandler}
             contentContainerStyle={{ paddingBottom: "45%" }}
             renderItem={({item, index}) => item ? (
                 <View>
