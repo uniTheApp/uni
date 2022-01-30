@@ -14,10 +14,12 @@ import {doc, setDoc, updateDoc, arrayUnion} from "@firebase/firestore"
 import { auth, db } from "../firebase"
 import {getStorage, ref, uploadBytes, getDownloadURL} from "@firebase/storage"
 
-const ImageUpload = (props, {style}) => {
+const ImageUpload = (props) => {
 
   const { user } = useAuth();
   const storage = getStorage();
+
+  // const [image, setImage] = useState(null);
 
     const selectImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -30,7 +32,7 @@ const ImageUpload = (props, {style}) => {
           console.log(result);
       
           if (!result.cancelled) {
-            setImage(result.uri);
+            // setImage(result.uri);
             imageName = `images/${auth.currentUser.uid}/` + new Date().getTime()
             await uploadImage(result.uri, imageName)
             addUrl(imageName)
@@ -53,14 +55,21 @@ const ImageUpload = (props, {style}) => {
       console.log("photo URL: " + photoURL)
       //add image to firestore
       if(user){
-        updateDoc(doc(db, "users", auth.currentUser.uid), {
-          photos: arrayUnion(photoURL)
-        });
+        //change URL at props.index unless len is less than chosen index, then append
+        props.index > props.photos.length - 1 ? (
+          updateDoc(doc(db, "users", auth.currentUser.uid), {
+            photos: arrayUnion(photoURL)
+          })
+        ):(
+          updateDoc(doc(db, "users", auth.currentUser.uid), {
+            photos: arrayUnion(photoURL)
+          })
+        )
       }
     };
 
   return (
-    <TouchableOpacity style={style} onPress={selectImage}>
+    <TouchableOpacity style={props.style} onPress={selectImage}>
       {props.children}
     </TouchableOpacity>
   );

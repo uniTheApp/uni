@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react/cjs/react.development";
 import useAuth from "../hooks/useAuth";
-import { collection, onSnapshot } from "firebase/firestore";
+import { doc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { styles } from "./Style";
 import MediumFillInBox from "./boxes/MediumFillInBox";
@@ -25,22 +25,17 @@ const Item = ({ image }) => (
 
 const profilePictures = () => {
   //RETRIEVING PHOTOS
-  const [profiles, setProfiles] = useState([]);
+  const [profile, setProfile] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
     let unsub;
 
     const fetchCards = async () => {
-      unsub = onSnapshot(collection(db, "users"), (snapshot) => {
-        setProfiles(
-          snapshot.docs
-            .filter((doc) => doc.id !== user.uid)
-            .map((doc) => ({
-              id: doc.id,
-              ...doc.data(),
-            }))
-        );
+      unsub = onSnapshot(doc(db, "users", user.uid), (snapshot) => {
+        setProfile(
+          snapshot.data()
+        )
       });
     };
 
@@ -58,7 +53,7 @@ const profilePictures = () => {
       {/* list of pictures from firebase */}
       <View style={styles.abovePictureContainer}>
         <FlatList
-          data={profiles}
+          data={profile}
           scrollEnabled="false"
           numColumns={3}
           key={3}
@@ -69,12 +64,12 @@ const profilePictures = () => {
 
       {/* overlaying buttons to edit profile pictures */}
       <View style={styles.beneathContainer}>
-        <PictureEdit></PictureEdit>
-        <PictureEdit></PictureEdit>
-        <PictureEdit></PictureEdit>
-        <PictureEdit></PictureEdit>
-        <PictureEdit></PictureEdit>
-        <PictureEdit></PictureEdit>
+        <PictureEdit index={0} photos={profile.photos}></PictureEdit>
+        <PictureEdit index={1} photos={profile.photos}></PictureEdit>
+        <PictureEdit index={2} photos={profile.photos}></PictureEdit>
+        <PictureEdit index={3} photos={profile.photos}></PictureEdit>
+        <PictureEdit index={4} photos={profile.photos}></PictureEdit>
+        <PictureEdit index={5} photos={profile.photos}></PictureEdit>
       </View>
 
       <View style={{ flexGrow: 1 }}>
