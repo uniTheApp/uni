@@ -47,12 +47,11 @@ const FeedSwiper = () => {
     // MATCHING HELPER FUNCTIONS
     const like = (postIndex) => {
         if (!profiles[postIndex]) return;
+        console.log(`post index: ${profiles[postIndex].userId}`)
+        let userSwiped = profiles[postIndex]
+        console.log(`${user.uid} likes ${userSwiped.firstName} ${userSwiped.userId} ${userSwiped}`)
 
-        const userSwiped = profiles[postIndex]
-        console.log(`you like ${userSwiped.firstName}`)
-
-
-        setDoc(doc(db, 'users', user.uid, 'likes', userSwiped.id))
+        setDoc(doc(db, 'users', user.uid, 'likes', userSwiped.userId), userSwiped)
     }
 
     const noMatch = async (index) => {
