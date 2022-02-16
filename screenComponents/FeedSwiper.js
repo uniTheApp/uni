@@ -46,13 +46,12 @@ const FeedSwiper = () => {
 
     // MATCHING HELPER FUNCTIONS
     const like = (postIndex) => {
-        if (!profiles[index]) return;
+        if (!profiles[postIndex]) return;
+        console.log(`post index: ${profiles[postIndex].userId}`)
+        let userSwiped = profiles[postIndex]
+        console.log(`${user.uid} likes ${userSwiped.firstName} ${userSwiped.userId} ${userSwiped}`)
 
-        const userSwiped = profiles[postIndex]
-        console.log(`you like ${userSwiped.firstName}`)
-
-
-        setDoc(doc(db, 'users', user.uid, 'like', userSwiped.id))
+        setDoc(doc(db, 'users', user.uid, 'likes', userSwiped.userId), userSwiped)
     }
 
     const noMatch = async (index) => {
@@ -76,6 +75,8 @@ const FeedSwiper = () => {
         [],
     )
     // END MATCHING HELPER FUNCTIONS 
+
+
 
      return (
      
@@ -129,7 +130,7 @@ const FeedSwiper = () => {
                     <TouchableOpacity style={tw("absolute bottom-36 right-2 bg-white rounded-full")}>
                             <Feather name="send" size={26} color="#B8EFFF" style={styles.cardButton} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={tw("absolute bottom-20 right-2 bg-white rounded-full")}>
+                    <TouchableOpacity style={tw("absolute bottom-20 right-2 bg-white rounded-full")} onPress={() => like(index)}>
                             <AntDesign name="hearto" size={26} color="#B8EFFF" style={styles.cardButton} />
                     </TouchableOpacity>
                     {/* end buttons */}
