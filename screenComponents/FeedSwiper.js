@@ -32,14 +32,21 @@ const FeedSwiper = () => {
 
         const fetchCards = async () => {
             
-            const passes = getDocs(collection(db, 'users', user.uid, 'rendered')).then(
+            const passes = await getDocs(collection(db, 'users', user.uid, 'rendered')).then(
                 (snapshot) => snapshot.docs.map((doc) => doc.id)
             );
 
 
+
             const passedUserIds = passes.length > 0 ? passes : ['test'];
 
-            unsub = onSnapshot(query(collection(db, "users"), where('id', 'not-in', [...passedUserIds])), snapshot => {
+            console.log([...passedUserIds])
+
+
+            // console.log("the user is " + user)
+
+            unsub = onSnapshot(query(collection(db, "users"), where('userId', 'not-in', [...passedUserIds])), snapshot => {
+            // unsub = onSnapshot(collection(db, "users"), snapshot => {
                 setProfiles(
                     snapshot.docs.filter(doc => doc.id !== user.uid).map(doc => ({
                         id: doc.id,
@@ -50,7 +57,7 @@ const FeedSwiper = () => {
         }
         fetchCards();
         return unsub
-    }, [])
+    }, [db])
 
     // MATCHING HELPER FUNCTIONS
     const like = (postIndex) => {
