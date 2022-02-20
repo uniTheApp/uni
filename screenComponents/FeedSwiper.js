@@ -12,7 +12,7 @@ import tw from "tailwind-rn";
 import { Entypo, AntDesign, Feather } from "@expo/vector-icons"
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState, useEffect, useRef, useCallback } from 'react/cjs/react.development';
-import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
+import { collection, doc, onSnapshot, setDoc, query, where, getDocs } from 'firebase/firestore';
 import { db } from "../firebase"
 import Carousel from './Carousel';
 import useAuth from '../hooks/useAuth'
@@ -31,7 +31,15 @@ const FeedSwiper = () => {
         let unsub;
 
         const fetchCards = async () => {
-            unsub = onSnapshot(collection(db, "users"), snapshot => {
+            
+            const passes = getDocs(collection(db, 'users', user.uid, 'rendered')).then(
+                (snapshot) => snapshot.docs.map((doc) => doc.id)
+            );
+
+
+            const passedUserIds = passes.length > 0 ? passes : ['test'];
+
+            unsub = onSnapshot(query(collection(db, "users"), where('id', 'not-in', [...passedUserIds])), snapshot => {
                 setProfiles(
                     snapshot.docs.filter(doc => doc.id !== user.uid).map(doc => ({
                         id: doc.id,
