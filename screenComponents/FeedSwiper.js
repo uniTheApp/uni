@@ -12,7 +12,7 @@ import tw from "tailwind-rn";
 import { Entypo, AntDesign, Feather } from "@expo/vector-icons"
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState, useEffect, useRef, useCallback } from 'react/cjs/react.development';
-import { collection, doc, onSnapshot, setDoc, query, where, getDocs } from 'firebase/firestore';
+import { collection, doc, onSnapshot, setDoc, query, where, getDocs, getDoc, DocumentSnapshot } from 'firebase/firestore';
 import { db } from "../firebase"
 import Carousel from './Carousel';
 import useAuth from '../hooks/useAuth'
@@ -63,10 +63,33 @@ const FeedSwiper = () => {
     const like = (postIndex) => {
         if (!profiles[postIndex]) return;
         console.log(`post index: ${profiles[postIndex].userId}`)
-        let userSwiped = profiles[postIndex]
-        console.log(`${user.uid} likes ${userSwiped.firstName} ${userSwiped.userId} ${userSwiped}`)
+        let userLiked = profiles[postIndex]
+        console.log(`${user.uid} likes ${userLiked.firstName} ${userLiked.userId} ${userLiked}`)
 
-        setDoc(doc(db, 'users', user.uid, 'likes', userSwiped.userId), userSwiped)
+
+        // check if user liked you
+
+        getDoc(doc(db, 'users', userLiked.id, 'likes', user.uid)).then(
+            (documentSnapshot) => {
+                if (documentSnapshot.exists()) {
+                    // user has liked you before you liked them
+                    // create a MATCH
+
+                    setDoc(doc(db, 'users', user.uid, 'likes', userLiked.userId), userLiked)
+
+
+                    // create the match
+
+
+
+                } else {
+                    // user is the first to like or didn't get swiped on 
+
+                    
+                }
+            })
+
+        setDoc(doc(db, 'users', user.uid, 'likes', userLiked.userId), userLiked)
     }
 
     const noMatch = async (index) => {
