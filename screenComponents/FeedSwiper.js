@@ -12,10 +12,13 @@ import tw from "tailwind-rn";
 import { Entypo, AntDesign, Feather } from "@expo/vector-icons"
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState, useEffect, useRef, useCallback } from 'react/cjs/react.development';
-import { collection, doc, onSnapshot, setDoc, query, where, getDocs, getDoc, DocumentSnapshot } from 'firebase/firestore';
+import { collection, doc, onSnapshot, setDoc, query, where, getDocs, getDoc, DocumentSnapshot, serverTimestamp } from 'firebase/firestore';
 import { db } from "../firebase"
 import Carousel from './Carousel';
 import useAuth from '../hooks/useAuth'
+import generateId from '../lib/generateId';
+import { useNavigation } from '@react-navigation/native'
+
 
 
 
@@ -25,6 +28,9 @@ const FeedSwiper = () => {
     const [profiles, setProfiles] = useState([]);
     const {user} = useAuth();
     const swipeRef = useRef(null)
+
+    const navigation = useNavigation();
+
 
     // Get the cards from the db, store the objs in the profiles array
     useEffect(() => {
@@ -79,6 +85,21 @@ const FeedSwiper = () => {
 
 
                     // create the match
+                    setDoc(doc(db, 'matches', generateId(user.uid, userLiked.id))), {
+                        users: {
+                            [user.uid]: user,
+                            [userLiked.id]: userLiked
+                        },
+                        usersMatched: [user.uid, userLiked.id],
+                        timestamp: serverTimestamp(),
+                    }
+
+
+                    navigation.navigate("Match", {
+                        user,
+                        userLiked,
+                    })
+
 
 
 

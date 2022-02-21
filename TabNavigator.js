@@ -8,6 +8,7 @@ import VerifyEmailScreen from "./screens/VerifyEmailScreen";
 import SearchScreen from "./screens/SearchScreen";
 import LoginScreen from "./screens/LoginScreen";
 import MessageScreen from "./screens/MessageScreen";
+import MatchedScreen from "./screens/MatchedScreen";
 import useAuth from "./hooks/useAuth";
 import {
   Ionicons,
@@ -116,6 +117,9 @@ const TabNavigator = () => {
         tabBarStyle: {display: "none"}
       }}
     /> 
+    <Stack.Group screenOptions={{ presentation: "transparentModal"}}>
+      <Stack.Screen name="Match" component={MatchedScreen} />
+    </Stack.Group>
   </Stack.Navigator>
   );
 };
