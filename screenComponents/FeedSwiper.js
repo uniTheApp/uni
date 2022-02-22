@@ -66,11 +66,17 @@ const FeedSwiper = () => {
     }, [db])
 
     // MATCHING HELPER FUNCTIONS
-    const like = (postIndex) => {
+    const like = async (postIndex) => {
         if (!profiles[postIndex]) return;
         console.log(`post index: ${profiles[postIndex].userId}`)
         let userLiked = profiles[postIndex]
         console.log(`${user.uid} likes ${userLiked.firstName} ${userLiked.userId} ${userLiked}`)
+
+        const loggedInProfile = await ( await getDoc(doc(db, 'users', user.uid))).data()
+
+        // console.log(`full data: ${loggedInProfiler}`)
+
+        console.log("test")
 
 
         // check if user liked you
@@ -83,20 +89,22 @@ const FeedSwiper = () => {
 
                     setDoc(doc(db, 'users', user.uid, 'likes', userLiked.userId), userLiked)
 
+                    console.log((`Matched with ${userLiked.id}`))
+                    console.log(`New ID: ${generateId(user.userid, userLiked.id)}`)
 
                     // create the match
-                    setDoc(doc(db, 'matches', generateId(user.uid, userLiked.id))), {
+                    setDoc(doc(db, 'matches', generateId(user.uid, userLiked.id)), {
                         users: {
-                            [user.uid]: user,
+                            [user.uid]: loggedInProfile,
                             [userLiked.id]: userLiked
                         },
                         usersMatched: [user.uid, userLiked.id],
                         timestamp: serverTimestamp(),
-                    }
+                    })
 
 
                     navigation.navigate("Match", {
-                        user,
+                        loggedInProfile,
                         userLiked,
                     })
 
@@ -106,11 +114,11 @@ const FeedSwiper = () => {
                 } else {
                     // user is the first to like or didn't get swiped on 
 
+                    setDoc(doc(db, 'users', user.uid, 'likes', userLiked.userId), userLiked)
                     
                 }
             })
 
-        setDoc(doc(db, 'users', user.uid, 'likes', userLiked.userId), userLiked)
     }
 
     const noMatch = async (index) => {
